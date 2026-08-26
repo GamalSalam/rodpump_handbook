@@ -42,10 +42,15 @@
         },
         {
           "type": "table",
-          "heading": "Component Assemblies Weights in Normal Lifts (Lbs)",
-          "columns": ["Head", "Beam / Equal Assy.", "Post", "G/B W/Cranks Unitbase*", "Engine Base**", "Ladder"],
+          "heading": "Detailed Component Weights (Lbs)",
+          "columns": ["Component Description", "Weight"],
           "rows": [
-            ["1135", "5102", "1935", "19175", "1045", "86"]
+            ["Head", "1,135"],
+            ["Beam / Equal Assy.", "5,102"],
+            ["Post", "1,935"],
+            ["G/B W/Cranks Unitbase*", "19,175"],
+            ["Engine Base**", "1,045"],
+            ["Ladder", "86"]
           ]
         },
         {
@@ -93,10 +98,15 @@
         },
         {
           "type": "table",
-          "heading": "Component Assemblies Weights in Normal Lifts (Lbs)",
-          "columns": ["Head", "Beam / Equal Assy.", "Post", "G/B W/Cranks Unitbase*", "Engine Base**", "Ladder"],
+          "heading": "Detailed Component Weights (Lbs)",
+          "columns": ["Component Description", "Weight"],
           "rows": [
-            ["1795", "7502", "2665", "22060", "1115", "86"]
+            ["Head", "1,795"],
+            ["Beam / Equal Assy.", "7,502"],
+            ["Post", "2,665"],
+            ["G/B W/Cranks Unitbase*", "22,060"],
+            ["Engine Base**", "1,115"],
+            ["Ladder", "86"]
           ]
         },
         {
@@ -144,10 +154,15 @@
         },
         {
           "type": "table",
-          "heading": "Component Assemblies Weights in Normal Lifts (Lbs)",
-          "columns": ["Head", "Beam / Equal Assy.", "Post", "G/B W/Cranks Unitbase*", "Engine Base**", "Ladder"],
+          "heading": "Detailed Component Weights (Lbs)",
+          "columns": ["Component Description", "Weight"],
           "rows": [
-            ["2100", "9489", "2665", "25890", "1115", "86"]
+            ["Head", "2,100"],
+            ["Beam / Equal Assy.", "9,489"],
+            ["Post", "2,665"],
+            ["G/B W/Cranks Unitbase*", "25,890"],
+            ["Engine Base**", "1,115"],
+            ["Ladder", "86"]
           ]
         },
         {
@@ -218,7 +233,7 @@
         {
           "type": "table",
           "heading": "Lufkin Counter Weight Reference Table",
-          "columns": ["Weight Type (Wt_Type)", "Weight (WT, lb)", "Length (leng, in)"],
+          "columns": ["Weight Type", "Weight (WT, lb)", "Length (leng, in)"],
           "rows": [
             ["1RO", "2075", "52\""],
             ["2RO", "1708", "48\""],

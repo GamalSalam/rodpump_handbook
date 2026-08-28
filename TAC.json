@@ -1,0 +1,88 @@
+{
+  "_meta": {
+    "note": "TAC and CSG configurations generated based on template.",
+    "last_updated": "2026-08-26"
+  },
+  "intro": "Technical parameters for Casing (CSG) and Tubing Anchor Catchers (TAC).",
+  "tabs": [
+    {
+      "label": "CSG Parameters",
+      "sections": [
+        {
+          "type": "table",
+          "heading": "Casing Specifications",
+          "columns": [
+            "Size (in)",
+            "Weight (wt/ft)",
+            "Grade",
+            "ID (in)"
+          ],
+          "rows": [
+            [
+              "9 5/8''",
+              "47",
+              "N-80",
+              "8.681"
+            ],
+            [
+              "9 5/8''",
+              "43.5",
+              "N-80",
+              "8.755"
+            ],
+            [
+              "9 5/8''",
+              "36",
+              "K-55",
+              "8.921"
+            ],
+            [
+              "7''",
+              "29",
+              "N-80",
+              "6.184"
+            ],
+            [
+              "7''",
+              "26",
+              "N-80",
+              "6.276"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "label": "TAC Parameters",
+      "image": "images/tac-device.jpg",
+      "sections": [
+        {
+          "type": "table",
+          "heading": "Tubing Anchor Catcher Size Chart",
+          "columns": [
+            "TAC Size (in)",
+            "OD - Slips Closed (in)",
+            "OD - Slips Opened (in)"
+          ],
+          "rows": [
+            [
+              "5.5''",
+              "4.5",
+              "5.187"
+            ],
+            [
+              "7''",
+              "5.5",
+              "6.552"
+            ],
+            [
+              "9 5/8''",
+              "8",
+              "9.125"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

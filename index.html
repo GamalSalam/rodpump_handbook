@@ -80,6 +80,16 @@
     display:block;font-size:.66rem;color:var(--accent-dim);
     letter-spacing:.1em;text-transform:uppercase;font-weight:600;
   }
+  .install-btn{
+    margin-left:auto;flex:0 0 auto;
+    display:none;align-items:center;gap:.35rem;
+    background:var(--accent);color:#1B222C;border:none;
+    padding:.45rem .8rem;border-radius:999px;
+    font-size:.78rem;font-weight:800;cursor:pointer;
+    white-space:nowrap;
+  }
+  .install-btn:active{background:#c17420;}
+  .install-btn svg{flex:0 0 auto;}
 
   /* ---------- Drawer ---------- */
   .scrim{
@@ -281,6 +291,10 @@
       <span class="ts">Field Reference</span>
     </div>
   </div>
+  <button class="install-btn" id="installBtn" type="button" aria-label="Install app">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+    Install
+  </button>
 </div>
 
 <div class="scrim" id="scrim"></div>
@@ -293,16 +307,14 @@
     <button class="drawer-link" data-page="home"><span class="dot"></span>Home</button>
 
     <div class="drawer-group-label">Reference</div>
-    <button class="drawer-link" data-page="surface-unit"><span class="dot"></span>Surface Unit</button>
     <button class="drawer-link" data-page="rods"><span class="dot"></span>Rods</button>
     <button class="drawer-link" data-page="tubing"><span class="dot"></span>Tubing</button>
-    <button class="drawer-link" data-page="tac"><span class="dot"></span>Tubing Anchor Catcher</button>
-    <button class="drawer-link" data-page="seating-nipple"><span class="dot"></span>Seating Nipple</button>
-    <button class="drawer-link" data-page="fishing-tools"><span class="dot"></span>Fishing Tools</button>
+    <div id="referenceDrawerLinks"></div>
 
     <div class="drawer-group-label">Calculators</div>
     <button class="drawer-link" data-page="calc-unset-pump"><span class="dot"></span>Unset DH Pump</button>
     <button class="drawer-link" data-page="calc-unset-tac"><span class="dot"></span>Unset TAC</button>
+    <button class="drawer-link" data-page="calc-tac-overpull"><span class="dot"></span>TAC Overpull</button>
   </div>
 </nav>
 
@@ -314,18 +326,6 @@
     <h1>Rod Pump Handbook</h1>
     <p class="section-sub">Reference data and calculators for sucker-rod pumping operations.</p>
     <div class="home-grid" id="homeGrid"></div>
-  </section>
-
-  <!-- SURFACE UNIT -->
-  <section class="page" id="page-surface-unit" data-title="Surface Unit">
-    <p class="eyebrow">Reference</p>
-    <h1>Surface Unit</h1>
-    <div id="content-surface-unit"></div>
-    <div class="card stub" id="stub-surface-unit">
-      <span class="ic">&#9881;</span>
-      <div class="t">Content coming soon</div>
-      <div>Drop a <code>surface-unit.json</code> file next to index.html to populate this page automatically.</div>
-    </div>
   </section>
 
   <!-- RODS -->
@@ -361,41 +361,11 @@
     <div id="tubingCards"></div>
   </section>
 
-  <!-- TAC -->
-  <section class="page" id="page-tac" data-title="Tubing Anchor Catcher">
-    <p class="eyebrow">Reference</p>
-    <h1>Tubing Anchor Catcher</h1>
-    <div id="content-tac"></div>
-    <div class="card stub" id="stub-tac">
-      <span class="ic">&#9881;</span>
-      <div class="t">Content coming soon</div>
-      <div>Drop a <code>tac.json</code> file next to index.html to populate this page automatically.</div>
-    </div>
-  </section>
-
-  <!-- SEATING NIPPLE -->
-  <section class="page" id="page-seating-nipple" data-title="Seating Nipple">
-    <p class="eyebrow">Reference</p>
-    <h1>Seating Nipple</h1>
-    <div id="content-seating-nipple"></div>
-    <div class="card stub" id="stub-seating-nipple">
-      <span class="ic">&#9881;</span>
-      <div class="t">Content coming soon</div>
-      <div>Drop a <code>seating-nipple.json</code> file next to index.html to populate this page automatically.</div>
-    </div>
-  </section>
-
-  <!-- FISHING TOOLS -->
-  <section class="page" id="page-fishing-tools" data-title="Fishing Tools">
-    <p class="eyebrow">Reference</p>
-    <h1>Fishing Tools</h1>
-    <div id="content-fishing-tools"></div>
-    <div class="card stub" id="stub-fishing-tools">
-      <span class="ic">&#9881;</span>
-      <div class="t">Content coming soon</div>
-      <div>Drop a <code>fishing-tools.json</code> file next to index.html to populate this page automatically.</div>
-    </div>
-  </section>
+  <!-- Reference pages beyond Rods/Tubing (Surface Unit, TAC, Seating
+       Nipple, Fishing Tools, and any future additions) are generated
+       at startup from the REFERENCE_PAGES list in the script below —
+       see buildReferencePages(). No static markup needed here; this
+       comment marks where they get inserted in the DOM. -->
 
   <!-- CALC: UNSET DH PUMP -->
   <section class="page" id="page-calc-unset-pump" data-title="Unset DH Pump">
@@ -532,6 +502,76 @@
     </div>
   </section>
 
+  <!-- CALC: TAC OVERPULL -->
+  <section class="page" id="page-calc-tac-overpull" data-title="TAC Overpull">
+    <p class="eyebrow">Calculator</p>
+    <h1>TAC Overpull</h1>
+    <p class="section-sub">Pickup tension to apply before setting the TAC, so tubing lands at neutral length once producing.</p>
+
+    <div id="tacOverpullNotReady" class="card stub">
+      <span class="ic">&#8987;</span>
+      <div class="t">Loading tubing data&hellip;</div>
+      <div>The calculator needs tubing.json to be loaded first.</div>
+    </div>
+
+    <div id="tacOverpullForm" style="display:none;">
+      <div class="card">
+        <p class="card-label">Tubing</p>
+        <div class="field">
+          <label for="topTbgSize">Tubing Size</label>
+          <select id="topTbgSize"></select>
+        </div>
+      </div>
+
+      <div class="card">
+        <p class="card-label">Fluid Levels &amp; Gradient</p>
+        <div class="field-row">
+          <div class="field">
+            <label for="topFluidGradient">Fluid Gradient (psi/ft)</label>
+            <input type="number" id="topFluidGradient" value="0.4" step="0.01" min="0">
+          </div>
+          <div class="field">
+            <label for="topPumpDepth">Pump Depth, L (ft)</label>
+            <input type="number" id="topPumpDepth" step="1" min="0">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="topX1">Fluid Level @ Anchor Set, X1 (ft)</label>
+            <input type="number" id="topX1" step="1" min="0">
+          </div>
+          <div class="field">
+            <label for="topX2">Working Fluid Level, X2 (ft)</label>
+            <input type="number" id="topX2" step="1" min="0">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <p class="card-label">Pressure &amp; Temperature</p>
+        <div class="field-row">
+          <div class="field">
+            <label for="topGasPressure">Gas Pressure in CSG, PO (psi)</label>
+            <input type="number" id="topGasPressure" value="0" step="1" min="0">
+          </div>
+          <div class="field">
+            <label for="topSurfaceTemp">Surface Fluid Temp, T1 (&deg;F)</label>
+            <input type="number" id="topSurfaceTemp" step="1">
+          </div>
+        </div>
+        <div class="field">
+          <label for="topYearlyTemp">Yearly Mean Temp, T2 (&deg;F)</label>
+          <input type="number" id="topYearlyTemp" step="1">
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-primary" id="topCalcBtn">Calculate</button>
+
+      <div id="topError"></div>
+      <div id="topResults"></div>
+    </div>
+  </section>
+
   <footer class="app-footer">
     <div class="dev-line">Developed by: Gamal Salama</div>
     <div class="contact-row">
@@ -545,6 +585,59 @@
 <script>
 (function(){
   "use strict";
+
+  /* ---------------------------------------------------------------
+     REFERENCE PAGES REGISTRY
+     To add a new reference page: add one entry here. That's the
+     whole job — the drawer link, the home page card, the page
+     section (with its "content coming soon" placeholder), and the
+     auto-fetch/render wiring are all generated from this list at
+     startup. Drop the matching JSON file (matching _template.json's
+     shape) next to index.html whenever the content is ready; until
+     then the page just shows its placeholder.
+
+     This does NOT cover Rods, Tubing, or the calculators — those have
+     dedicated logic (structured data feeding live calculations) and
+     stay hand-built. See HANDOFF.md for why.
+     ------------------------------------------------------------- */
+  var REFERENCE_PAGES = [
+    { id: 'surface-unit',   label: 'Surface Unit',          icon: '&#9881;',   sub: 'Geometry & types', json: 'surface-unit.json' },
+    { id: 'tac',            label: 'Tubing Anchor Catcher', icon: '&#9875;',   sub: 'Anchor catcher',   json: 'tac.json' },
+    { id: 'seating-nipple', label: 'Seating Nipple',        icon: '&#9679;',   sub: 'Profiles',         json: 'seating-nipple.json' },
+    { id: 'fishing-tools',  label: 'Fishing Tools',         icon: '&#127907;', sub: 'Types & use',      json: 'fishing-tools.json' }
+  ];
+
+  // Builds the drawer link + page section (with content/stub containers)
+  // for every entry in REFERENCE_PAGES. Runs once, synchronously, before
+  // the Navigation section below captures '.drawer-link' / '.page'
+  // elements — so generated pages are included in nav wiring for free.
+  (function buildReferencePages(){
+    var drawerSlot = document.getElementById('referenceDrawerLinks');
+    var mainEl = document.querySelector('main');
+    var footerEl = document.querySelector('.app-footer');
+    REFERENCE_PAGES.forEach(function(rp){
+      var link = document.createElement('button');
+      link.className = 'drawer-link';
+      link.dataset.page = rp.id;
+      link.innerHTML = '<span class="dot"></span>' + rp.label;
+      drawerSlot.appendChild(link);
+
+      var section = document.createElement('section');
+      section.className = 'page';
+      section.id = 'page-' + rp.id;
+      section.dataset.title = rp.label;
+      section.innerHTML =
+        '<p class="eyebrow">Reference</p>' +
+        '<h1>' + rp.label + '</h1>' +
+        '<div id="content-' + rp.id + '"></div>' +
+        '<div class="card stub" id="stub-' + rp.id + '">' +
+          '<span class="ic">&#9881;</span>' +
+          '<div class="t">Content coming soon</div>' +
+          '<div>Drop a <code>' + rp.json + '</code> file next to index.html to populate this page automatically.</div>' +
+        '</div>';
+      mainEl.insertBefore(section, footerEl);
+    });
+  })();
 
   /* ---------- Navigation ---------- */
   var menuBtn = document.getElementById('menuBtn');
@@ -589,15 +682,15 @@
 
   /* ---------- Home grid ---------- */
   var homeItems = [
-    {id:'surface-unit',   icon:'&#9881;',  label:'Surface Unit',   sub:'Geometry & types'},
     {id:'rods',           icon:'&#128206;', label:'Rods',           sub:'D78 / N97 data'},
-    {id:'tubing',         icon:'&#128279;', label:'Tubing',         sub:'2-7/8" / 3-1/2"'},
-    {id:'tac',            icon:'&#9875;',  label:'TAC',            sub:'Anchor catcher'},
-    {id:'seating-nipple', icon:'&#9679;',  label:'Seating Nipple', sub:'Profiles'},
-    {id:'fishing-tools',  icon:'&#127907;', label:'Fishing Tools',  sub:'Types & use'},
+    {id:'tubing',         icon:'&#128279;', label:'Tubing',         sub:'2-7/8" / 3-1/2"'}
+  ].concat(REFERENCE_PAGES.map(function(rp){
+    return { id: rp.id, icon: rp.icon, label: rp.label, sub: rp.sub };
+  })).concat([
     {id:'calc-unset-pump',icon:'&#128736;', label:'Unset DH Pump',  sub:'Max pull calc'},
-    {id:'calc-unset-tac', icon:'&#128736;', label:'Unset TAC',      sub:'Release tension'}
-  ];
+    {id:'calc-unset-tac', icon:'&#128736;', label:'Unset TAC',      sub:'Release tension'},
+    {id:'calc-tac-overpull', icon:'&#128736;', label:'TAC Overpull', sub:'Pickup tension'}
+  ]);
   var homeGrid = document.getElementById('homeGrid');
   homeItems.forEach(function(it){
     var btn = document.createElement('button');
@@ -929,6 +1022,61 @@
     };
   }
 
+  /**
+   * calculateTACOverpull — converted from tacOverpull.js (Baker Oil Tools
+   * "BAKER .Calc" worksheet). Determines how much tension to pick up on
+   * the tubing before setting the TAC, combining ballooning, gas-pressure,
+   * and thermal tubing-movement effects.
+   *
+   * Tubing OD/ID are sourced from tubingData (tubing.json) by size, same
+   * pattern as the other calculators, instead of the sheet's separate
+   * 2-row OD->ID lookup table — more accurate since it uses the exact ID
+   * for that tubing entry rather than an approximate default.
+   *
+   * The sheet uses the literal 3.14 (not full-precision pi) and a fixed
+   * 207 psi/°F thermal coefficient throughout — preserved exactly here so
+   * results match the original workbook.
+   */
+  var PI_APPROX = 3.14;
+  var THERMAL_COEFFICIENT_PSI_PER_F = 207;
+
+  function calculateTACOverpull(inputs){
+    var tbg = findTubingBySize(inputs.tbgSize);
+    if(!tbg) throw new Error('No tubing data for size ' + inputs.tbgSize + '.');
+
+    var tbgOD = tbg.od_in;
+    var tbgID = tbg.tube_id_in;
+
+    var areaOD = (PI_APPROX / 4) * tbgOD * tbgOD;
+    var areaWall = (tbgOD * tbgOD - tbgID * tbgID) * (PI_APPROX / 4);
+
+    var deltaTempF = inputs.surfaceFluidTempF - inputs.yearlyMeanTempF;
+
+    var f1Ballooning = areaOD * inputs.fluidGradientPsiPerFt *
+      (inputs.workingFluidLevelFt * ((0.3 * inputs.workingFluidLevelFt) / inputs.pumpDepthFt + 0.4));
+
+    var f2Ballooning = areaOD * inputs.fluidGradientPsiPerFt *
+      ((tbgOD * tbgOD - tbgID * tbgID) / (tbgOD * tbgOD)) *
+      inputs.fluidLevelAtAnchorSetFt *
+      ((0.3 * inputs.fluidLevelAtAnchorSetFt) / inputs.pumpDepthFt + 0.4);
+
+    var f3GasPressure = areaOD * 0.4 * (inputs.gasPressurePsi || 0);
+
+    var f4Thermal = THERMAL_COEFFICIENT_PSI_PER_F * areaWall * (deltaTempF / 2);
+
+    var pickupLb = f1Ballooning - f2Ballooning - f3GasPressure + f4Thermal;
+
+    return {
+      tbg: { od: tbgOD, id: tbgID, areaOD: areaOD, areaWall: areaWall },
+      deltaTempF: deltaTempF,
+      f1Ballooning: f1Ballooning,
+      f2Ballooning: f2Ballooning,
+      f3GasPressure: f3GasPressure,
+      f4Thermal: f4Thermal,
+      pickupLb: pickupLb
+    };
+  }
+
   /* ---------- DHP calculator UI ---------- */
   var dhpRodRowCount = 0;
   function dhpSizeOptions(selectedSize){
@@ -1131,7 +1279,55 @@
     }
   }
 
-  /* ---------- Wire up both calculators once data is ready ---------- */
+  /* ---------- TAC Overpull calculator UI ---------- */
+  function topTbgOptions(){
+    return tubingData.sizes.map(function(t){ return '<option value="'+t.size+'">'+t.size+'&Prime; ('+t.grade+')</option>'; }).join('');
+  }
+
+  function runTacOverpullCalculation(){
+    var errEl = document.getElementById('topError');
+    var resEl = document.getElementById('topResults');
+    errEl.innerHTML = '';
+    resEl.innerHTML = '';
+    try{
+      var result = calculateTACOverpull({
+        tbgSize: document.getElementById('topTbgSize').value,
+        fluidGradientPsiPerFt: parseFloat(document.getElementById('topFluidGradient').value) || 0,
+        fluidLevelAtAnchorSetFt: parseFloat(document.getElementById('topX1').value) || 0,
+        workingFluidLevelFt: parseFloat(document.getElementById('topX2').value) || 0,
+        pumpDepthFt: parseFloat(document.getElementById('topPumpDepth').value) || 0,
+        gasPressurePsi: parseFloat(document.getElementById('topGasPressure').value) || 0,
+        surfaceFluidTempF: parseFloat(document.getElementById('topSurfaceTemp').value) || 0,
+        yearlyMeanTempF: parseFloat(document.getElementById('topYearlyTemp').value) || 0
+      });
+
+      var html = '';
+      html += '<div class="card result-card"><div class="result-hero">'+
+        '<div class="lbl">Pickup (Overpull)</div>'+
+        '<div class="val">'+fmtNum(Math.round(result.pickupLb)) + ' <small>lbf</small></div>'+
+        '</div>'+
+        '<div class="kv"><span class="k">Tubing OD</span><span class="v">'+result.tbg.od.toFixed(3)+'&Prime;</span></div>'+
+        '<div class="kv"><span class="k">Tubing ID</span><span class="v">'+result.tbg.id.toFixed(3)+'&Prime;</span></div>'+
+        '<div class="kv"><span class="k">Area OD</span><span class="v">'+result.tbg.areaOD.toFixed(3)+' sq.in</span></div>'+
+        '<div class="kv"><span class="k">Area Wall</span><span class="v">'+result.tbg.areaWall.toFixed(3)+' sq.in</span></div>'+
+        '</div>';
+
+      html += '<div class="card"><p class="card-label">Effect Breakdown</p>'+
+        '<div class="kv"><span class="k">F1 &mdash; Ballooning @ X2</span><span class="v">'+fmtNum(result.f1Ballooning)+' lb</span></div>'+
+        '<div class="kv"><span class="k">F2 &mdash; Ballooning @ X1</span><span class="v">'+fmtNum(result.f2Ballooning)+' lb</span></div>'+
+        '<div class="kv"><span class="k">F3 &mdash; Gas Pressure</span><span class="v">'+fmtNum(result.f3GasPressure)+' lb</span></div>'+
+        '<div class="kv"><span class="k">F4 &mdash; Thermal</span><span class="v">'+fmtNum(result.f4Thermal)+' lb</span></div>'+
+        '<div class="kv"><span class="k">&Delta;t (T1 &minus; T2)</span><span class="v">'+result.deltaTempF.toFixed(1)+' &deg;F</span></div>'+
+        '</div>'+
+        '<p class="note">Pickup = F1 &minus; F2 &minus; F3 + F4. Apply this much tension/slack when setting the TAC so the tubing lands at neutral length once producing.</p>';
+
+      resEl.innerHTML = html;
+    }catch(e){
+      errEl.innerHTML = '<div class="calc-error">'+e.message+'</div>';
+    }
+  }
+
+  /* ---------- Wire up all calculators once data is ready ---------- */
   var calculatorsInitialized = false;
   function maybeInitCalculators(){
     if(calculatorsInitialized) return;
@@ -1156,6 +1352,12 @@
     addTacRodRow();
     document.getElementById('tacAddRod').addEventListener('click', addTacRodRow);
     document.getElementById('tacCalcBtn').addEventListener('click', runTacCalculation);
+
+    // TAC Overpull
+    document.getElementById('tacOverpullNotReady').style.display = 'none';
+    document.getElementById('tacOverpullForm').style.display = 'block';
+    document.getElementById('topTbgSize').innerHTML = topTbgOptions();
+    document.getElementById('topCalcBtn').addEventListener('click', runTacOverpullCalculation);
   }
 
   /* ---------------------------------------------------------------
@@ -1317,14 +1519,10 @@
     }
   }
 
-  var genericPages = [
-    { id: 'surface-unit',   json: 'surface-unit.json' },
-    { id: 'tac',            json: 'tac.json' },
-    { id: 'seating-nipple', json: 'seating-nipple.json' },
-    { id: 'fishing-tools',  json: 'fishing-tools.json' }
-  ];
-
-  genericPages.forEach(function(gp){
+  // Fetches + renders every page listed in REFERENCE_PAGES (defined at
+  // the top of this script). Adding a new reference page there is all
+  // that's needed — this loop and buildReferencePages() handle the rest.
+  REFERENCE_PAGES.forEach(function(gp){
     var container = document.getElementById('content-' + gp.id);
     var stub = document.getElementById('stub-' + gp.id);
     fetch(gp.json, {cache: 'no-store'}).then(function(r){
@@ -1351,6 +1549,51 @@
       navigator.serviceWorker.register('sw.js').catch(function(err){
         console.log('Service worker registration failed:', err);
       });
+    });
+  }
+
+  // ---------------------------------------------------------------
+  // PWA install button.
+  // Chrome/Edge/Android fire 'beforeinstallprompt' when the app meets
+  // install criteria (served over https/localhost, has a valid manifest
+  // + service worker, not already installed). We capture that event
+  // instead of letting the browser show its own mini-infobar, so we can
+  // trigger the native install prompt from our own visible button.
+  //
+  // NOTE: iOS Safari never fires this event — there is no programmatic
+  // install API there. iOS users still install via Share > Add to Home
+  // Screen manually; the button simply never appears for them, which is
+  // expected, not a bug.
+  // ---------------------------------------------------------------
+  var deferredInstallPrompt = null;
+  var installBtn = document.getElementById('installBtn');
+
+  function isAlreadyInstalled(){
+    return window.matchMedia('(display-mode: standalone)').matches ||
+           window.navigator.standalone === true; // iOS home-screen launch flag
+  }
+
+  if(installBtn && !isAlreadyInstalled()){
+    window.addEventListener('beforeinstallprompt', function(e){
+      e.preventDefault();
+      deferredInstallPrompt = e;
+      installBtn.style.display = 'inline-flex';
+    });
+
+    installBtn.addEventListener('click', function(){
+      if(!deferredInstallPrompt) return;
+      installBtn.style.display = 'none';
+      deferredInstallPrompt.prompt();
+      deferredInstallPrompt.userChoice.then(function(){
+        // Whether accepted or dismissed, this prompt instance is spent —
+        // Chrome will fire a fresh beforeinstallprompt later if eligible.
+        deferredInstallPrompt = null;
+      });
+    });
+
+    window.addEventListener('appinstalled', function(){
+      installBtn.style.display = 'none';
+      deferredInstallPrompt = null;
     });
   }
 </script>

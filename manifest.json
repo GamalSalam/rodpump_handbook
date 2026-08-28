@@ -1,6 +1,6 @@
 {
   "name": "Rod Pump Field Handbook",
-  "short_name": "RPH",
+  "short_name": "RodBook",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

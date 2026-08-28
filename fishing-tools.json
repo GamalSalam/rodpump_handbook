@@ -439,16 +439,74 @@
       ]
     },
     {
-      "label": "Overshot Socket",
-      "sections": [
-        {
-          "type": "image",
-          "heading": "Overshot Socket Component Cross-Section",
-          "src": "images/overshot-socket-diagram.jpg",
-          "alt": "Overshot Socket drawing highlighting inner parts from upper spring to lower slips."
-        }
+  "label": "Overshot Socket",
+  "sections": [
+    {
+      "type": "image",
+      "heading": "Overshot Socket Component Cross-Section",
+      "src": "images/overshot-socket-diagram.jpg",
+      "alt": "Overshot Socket drawing highlighting inner parts from upper spring to lower slips."
+    },
+    {
+      "type": "table",
+      "heading": "Overshot Socket Parts & Catalog Numbers",
+      "columns": [
+        "Item",
+        "Qty",
+        "Description",
+        "Regular 2-1/16\" Tubing",
+        "Regular 2-3/8\" Tubing",
+        "Regular 2-7/8\" Tubing",
+        "Regular 3-1/2\" Tubing",
+        "Oversize 2-3/8\" Tubing",
+        "Oversize 2-7/8\" Tubing",
+        "Oversize 3-1/2\" Tubing"
+      ],
+      "rows": [
+        ["Fig. II", "---", "Combination Socket (Complete)", "CH21-175", "CH21-20", "CH21-25", "CH21-30", "OS21-20", "OS21-25", "OS21-30"],
+        ["---", "---", "Coupling Socket¹", "CH11-175", "CH11-20", "CH11-25", "CH11-30", "OS11-20", "OS11-25", "OS11-30"],
+        ["---", "---", "Outside Diameter", "1-21/32\"", "1-29/32\"", "2-11/32\"", "2-7/8\"", "1-29/32\"", "2-11/32\"", "2-7/8\""],
+        ["A", "1", "Top", "HS1-175", "CH3-20", "CH3-25", "CH3-30", "OS3-20", "OS3-25", "OS3-30"],
+        ["---", "---", "Size Pin Furnished", "1-1/16\"", "1-1/16\"", "1-1/16\"", "1-3/16\"", "1-1/16\"", "1-1/16\"", "1-3/16\""],
+        ["B", "1", "Bowl, Upper", "HS5-175", "CH5-20", "CH5-25", "CH5-30", "OS5-20", "OS5-25", "OS5-30"],
+        ["C", "1", "Spring, Upper", "BS7-20", "BS7-20", "BS7-30", "CH6-30", "BS7-20", "BS7-30", "CH6-30"],
+        ["D", "1", "Slips, Upper (7/16\" thru 5/8\" diameters)", "BS15-20", "BS15-20", "BS15-25", "---", "BS15-20", "BS15-25", "---"],
+        ["D", "1", "Slips, Upper (5/8\" thru 3/4\" diameters)", "BS3-20 •", "BS3-20 •", "BS3-25", "BS3-30", "BS3-20 •", "BS3-25", "BS3-30"],
+        ["D", "1", "Slips, Upper (3/4\" thru 7/8\" diameters)", "---", "BS12-20", "BS12-25", "BS12-30", "BS12-20", "BS12-25 •", "BS12-30"],
+        ["D", "1", "Slips, Upper (7/8\" thru 1\" diameters)", "---", "---", "BS19-25 •", "BS19-30 •", "---", "BS19-25", "BS19-30 •"],
+        ["D", "1", "Slips, Upper (1\" thru 1-1/8\" diameters)", "---", "---", "---", "BS21-30", "---", "---", "BS21-30"],
+        ["E", "---", "Ring, Spring", "BS14-20", "BS14-20", "BS14-25", "BS14-30", "BS14-20", "BS14-25", "BS14-30"],
+        ["F", "1", "Bowl, Lower", "CH2-175", "CH2-20", "CH2-25", "CH2-30", "OS2-20", "OS2-25", "OS2-30"],
+        ["G", "1", "Spring, Lower", "BS7-25", "BS2-20", "BS2-25", "BS2-30", "BS2-20", "BS2-25", "BS2-30"],
+        ["H", "1", "Slip Unit For 1\" O.D. Coupling", "CH4S-175", "---", "---", "---", "---", "---", "---"],
+        ["H", "1", "Slip Unit For 1-1/4\" O.D. Coupling", "CH4T-175 •", "CH4T-25", "CH4T-25", "---", "OS4T-20", "---", "---"],
+        ["H", "1", "Slip Unit For 1-3/8\" O.D. Coupling", "---", "CH4A-20", "CH4A-25", "CH4A-25", "OS4A-20", "---", "---"],
+        ["H", "1", "Slip Unit For 1-7/16\" O.D. Coupling", "---", "CH4B-20", "CH4B-25", "---", "OS4B-20", "---", "---"],
+        ["H", "1", "Slip Unit For 1-1/2\" O.D. Coupling", "---", "CH4C-20 •", "CH4C-25", "CH4C-30", "OS4C-20", "OS4C-25", "---"],
+        ["H", "1", "Slip Unit For 1-9/16\" O.D. Coupling", "---", "CH4D-20", "CH4D-25", "CH4D-30", "OS4D-20", "OS4D-25", "---"],
+        ["H", "1", "Slip Unit For 1-5/8\" O.D. Coupling", "---", "---", "CH4E-25", "CH4E-30", "OS4E-20 •", "OS4E-25", "OS4E-30"],
+        ["H", "1", "Slip Unit For 1-11/16\" O.D. Coupling", "---", "---", "CH4F-25", "CH4F-30", "---", "OS4F-25", "---"],
+        ["H", "1", "Slip Unit For 1-3/4\" O.D. Coupling", "---", "---", "CH4G-25", "CH4G-30", "---", "OS4G-25", "OS4G-30"],
+        ["H", "1", "Slip Unit For 1-13/16\" O.D. Coupling", "---", "---", "CH4H-25 •", "CH4H-30", "---", "OS4H-25", "OS4H-30"],
+        ["H", "1", "Slip Unit For 1-7/8\" O.D. Coupling", "---", "---", "---", "CH4J-30", "---", "OS4J-25", "OS4J-30"],
+        ["H", "1", "Slip Unit For 1-15/16\" O.D. Coupling", "---", "---", "---", "CH4K-30", "---", "OS4K-25", "OS4K-30"],
+        ["H", "1", "Slip Unit For 2\" O.D. Coupling", "---", "---", "---", "CH4L-30", "---", "OS4L-25 •", "OS4L-30"],
+        ["H", "1", "Slip Unit For 2-1/16\" O.D. Coupling", "---", "---", "---", "CH4M-30", "---", "---", "OS4M-30"],
+        ["H", "1", "Slip Unit For 2-3/16\" O.D. Coupling", "---", "---", "---", "CH4P-30 •", "---", "---", "OS4P-30 •"],
+        ["H", "1", "Slip Unit For 2-1/4\" O.D. Coupling", "---", "---", "---", "---", "---", "---", "OS4Q-30"],
+        ["H", "1", "Slip Unit For 2-3/8\" O.D. Coupling", "---", "---", "---", "---", "---", "---", "OS4R-30"]
       ]
     },
+    {
+      "type": "list",
+      "heading": "Standard Provision Notes",
+      "items": [
+        "¹Coupling sockets do not include items B, C, D and E.",
+        "• Standard parts will be shipped unless otherwise specified."
+      ]
+    }
+  ]
+},
     {
       "label": "Type B Socket",
       "sections": [

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Rod Pump Handbook">
+<meta name="apple-mobile-web-app-title" content="RodBook">
 <meta name="theme-color" content="#1E3A5F">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png">
@@ -1077,10 +1077,29 @@
       return sizeEntry ? sizeEntry.max_pull_lbf : null;
     });
 
+    // Max allowable OVERPULL governed by taper i = that taper's own rated
+    // tension minus the buoyed weight already hanging below its top
+    // connection (that weight already consumes part of the rating before
+    // any overpull is applied at all — whatever's left over is the safe
+    // overpull margin for that taper).
+    //
+    // "Below taper i" = taper i itself + every taper below it (tapers are
+    // ordered top to bottom) + ALL K-Bar weight, since K-Bars always sit
+    // at the very bottom of the string, below every rod taper.
+    //
+    // Buoyancy factor (BF = 1 - 0.128*SG) is the standard steel-in-fluid
+    // approximation already used elsewhere in this calculator
+    // (buoyancyEffect below) — applied uniformly here since this
+    // calculator doesn't track fluid level vs. depth per taper.
+    var totalKbarWeight = kbarWeights.reduce(function(a,b){return a+b;}, 0);
+    var buoyancyFactor = (spGravity !== undefined && spGravity !== null && spGravity !== '')
+      ? (1 - 0.128 * spGravity) : 1;
+
     var currentAllowTensions = tapers.map(function(t, i){
       if(gradeTensions[i] === null) return null;
-      var weightAbove = rodWeights.slice(0, i).reduce(function(a,b){return a+b;}, 0);
-      return weightAbove + gradeTensions[i];
+      var weightBelowDry = rodWeights.slice(i).reduce(function(a,b){return a+b;}, 0) + totalKbarWeight;
+      var buoyedWeightBelow = weightBelowDry * buoyancyFactor;
+      return gradeTensions[i] - buoyedWeightBelow;
     });
 
     var validTensions = currentAllowTensions.filter(function(v){ return v !== null; });
@@ -1344,7 +1363,7 @@
    * tubing.json (it's casing-specific reference data) — kept embedded
    * here as fixed data, same treatment as the WFD charts above.
    */
-var DEFAULT_ANNULUS_CAPACITY_TABLE = [
+  var DEFAULT_ANNULUS_CAPACITY_TABLE = [
     // 5 1/2" Casing
     { csgSize: '5 1/2"', tbgSize: '2 7/8"', csgWeight: 14,   capPerFt: 0.01637 },
     { csgSize: '5 1/2"', tbgSize: '2 7/8"', csgWeight: 15.5, capPerFt: 0.01577 },
@@ -1372,7 +1391,7 @@ var DEFAULT_ANNULUS_CAPACITY_TABLE = [
     { csgSize: '9 5/8"', tbgSize: '2 7/8"', csgWeight: 47, capPerFt: 0.06517 },
     { csgSize: '9 5/8"', tbgSize: '2 7/8"', csgWeight: 43, capPerFt: 0.06642 },
     { csgSize: '9 5/8"', tbgSize: '2 7/8"', csgWeight: 36, capPerFt: 0.06927 }
-];
+  ];
 
   function calculateTbgCapacityHelper(inputs){
     var tbg = findTubingBySize(inputs.tbgSize);

@@ -71,6 +71,12 @@
   .menu-btn.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
 
   .topbar-title{display:flex;align-items:center;gap:.55rem;min-width:0;}
+  .topbar-title.home-link{
+    background:none;border:none;padding:0;cursor:pointer;text-align:left;
+    color:inherit;font:inherit;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .topbar-title.home-link:active{opacity:.75;}
   .rig-icon{flex:0 0 auto;opacity:.95;}
   .topbar-title .tt{
     font-weight:800;font-size:1.0rem;letter-spacing:.02em;
@@ -275,7 +281,7 @@
 
 <div class="topbar">
   <button class="menu-btn" id="menuBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
-  <div class="topbar-title">
+  <button class="topbar-title home-link" id="homeLink" type="button" aria-label="Go to Home page">
     <svg class="rig-icon" width="26" height="26" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M6 40H42" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
       <path d="M14 40V22" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
@@ -290,7 +296,7 @@
       <span class="tt">Rod Pump Handbook</span>
       <span class="ts">Field Reference</span>
     </div>
-  </div>
+  </button>
   <button class="install-btn" id="installBtn" type="button" aria-label="Install app">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
     Install
@@ -315,6 +321,7 @@
     <button class="drawer-link" data-page="calc-unset-pump"><span class="dot"></span>Unset DH Pump</button>
     <button class="drawer-link" data-page="calc-unset-tac"><span class="dot"></span>Unset TAC</button>
     <button class="drawer-link" data-page="calc-tac-overpull"><span class="dot"></span>TAC Overpull</button>
+    <button class="drawer-link" data-page="calc-capacity"><span class="dot"></span>Field Calculators</button>
   </div>
 </nav>
 
@@ -506,7 +513,7 @@
   <section class="page" id="page-calc-tac-overpull" data-title="TAC Overpull">
     <p class="eyebrow">Calculator</p>
     <h1>TAC Overpull</h1>
-    <p class="section-sub">Pickup tension to apply before setting the TAC, so tubing lands at neutral length once producing.</p>
+    <p class="section-sub">Pickup tension before setting the TAC, by three independent methods (Baker, Don-Nan, WFD) shown side by side for comparison.</p>
 
     <div id="tacOverpullNotReady" class="card stub">
       <span class="ic">&#8987;</span>
@@ -516,15 +523,35 @@
 
     <div id="tacOverpullForm" style="display:none;">
       <div class="card">
-        <p class="card-label">Tubing</p>
+        <p class="card-label">Tubing &amp; Fluid Levels <span style="text-transform:none;font-weight:400;">(shared by all 3 methods)</span></p>
         <div class="field">
           <label for="topTbgSize">Tubing Size</label>
           <select id="topTbgSize"></select>
         </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="topX1">Install Fluid Level, X1 (ft)</label>
+            <input type="number" id="topX1" step="1" min="0">
+          </div>
+          <div class="field">
+            <label for="topX2">Operating Fluid Level, X2 (ft)</label>
+            <input type="number" id="topX2" step="1" min="0">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="topSurfaceTemp">Surface Fluid Temp, T1 (&deg;F)</label>
+            <input type="number" id="topSurfaceTemp" step="1">
+          </div>
+          <div class="field">
+            <label for="topYearlyTemp">Yearly Mean Temp, T2 (&deg;F)</label>
+            <input type="number" id="topYearlyTemp" step="1">
+          </div>
+        </div>
       </div>
 
       <div class="card">
-        <p class="card-label">Fluid Levels &amp; Gradient</p>
+        <p class="card-label">Baker Method Inputs</p>
         <div class="field-row">
           <div class="field">
             <label for="topFluidGradient">Fluid Gradient (psi/ft)</label>
@@ -535,40 +562,152 @@
             <input type="number" id="topPumpDepth" step="1" min="0">
           </div>
         </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="topX1">Fluid Level @ Anchor Set, X1 (ft)</label>
-            <input type="number" id="topX1" step="1" min="0">
-          </div>
-          <div class="field">
-            <label for="topX2">Working Fluid Level, X2 (ft)</label>
-            <input type="number" id="topX2" step="1" min="0">
-          </div>
+        <div class="field">
+          <label for="topGasPressure">Gas Pressure in CSG, PO (psi)</label>
+          <input type="number" id="topGasPressure" value="0" step="1" min="0">
         </div>
       </div>
 
       <div class="card">
-        <p class="card-label">Pressure &amp; Temperature</p>
-        <div class="field-row">
-          <div class="field">
-            <label for="topGasPressure">Gas Pressure in CSG, PO (psi)</label>
-            <input type="number" id="topGasPressure" value="0" step="1" min="0">
-          </div>
-          <div class="field">
-            <label for="topSurfaceTemp">Surface Fluid Temp, T1 (&deg;F)</label>
-            <input type="number" id="topSurfaceTemp" step="1">
-          </div>
-        </div>
+        <p class="card-label">Don-Nan Method Inputs</p>
         <div class="field">
-          <label for="topYearlyTemp">Yearly Mean Temp, T2 (&deg;F)</label>
-          <input type="number" id="topYearlyTemp" step="1">
+          <label for="topTacDepth">TAC Depth (ft)</label>
+          <input type="number" id="topTacDepth" step="1" min="0">
         </div>
+        <p class="note">Everything else Don-Nan needs is derived automatically from the Baker inputs above: Specific Gravity = Fluid Gradient, Net Liquid Above Install = Pump Depth &minus; Install Fluid Level, Operating Fluid Above Pump = Pump Depth &minus; Operating Fluid Level, PSN Depth = Pump Depth.</p>
       </div>
 
-      <button type="button" class="btn btn-primary" id="topCalcBtn">Calculate</button>
+      <p class="note">WFD Method uses only the shared fields above (no extra inputs) &mdash; it reads off fixed field charts, so a fluid level or temperature difference outside the chart's tabulated range will show as "out of range" instead of a number, without affecting the other two methods.</p>
+
+      <button type="button" class="btn btn-primary" id="topCalcBtn">Calculate All 3 Methods</button>
 
       <div id="topError"></div>
       <div id="topResults"></div>
+    </div>
+  </section>
+
+  <!-- CALC: CAPACITY HELPERS -->
+  <section class="page" id="page-calc-capacity" data-title="Field Calculators">
+    <p class="eyebrow">Calculator</p>
+    <h1>Field Calculators</h1>
+    <p class="section-sub">Four field helper calcs: tubing capacity, annulus capacity, pump displacement, and pump intake pressure (PIP).</p>
+
+    <div id="capacityNotReady" class="card stub">
+      <span class="ic">&#8987;</span>
+      <div class="t">Loading tubing data&hellip;</div>
+      <div>The calculator needs tubing.json to be loaded first.</div>
+    </div>
+
+    <div id="capacityFormWrap" style="display:none;">
+      <div class="tabs" id="capacityTabs"></div>
+
+      <!-- TBG Capacity -->
+      <div class="cap-panel" id="capPanel-tbg">
+        <div class="card">
+          <p class="card-label">Tubing Capacity</p>
+          <div class="field">
+            <label for="capTbgSize">Tubing Size</label>
+            <select id="capTbgSize"></select>
+          </div>
+          <div class="field">
+            <label for="capTbgDepth">Depth (ft)</label>
+            <input type="number" id="capTbgDepth" step="1" min="0">
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary" id="capTbgCalcBtn">Calculate</button>
+        <div id="capTbgError"></div>
+        <div id="capTbgResults"></div>
+      </div>
+
+      <!-- Annulus Capacity -->
+      <div class="cap-panel" id="capPanel-annulus" style="display:none;">
+        <div class="card">
+          <p class="card-label">Annulus Capacity</p>
+          <div class="field-row">
+            <div class="field">
+              <label for="capCsgSize">Casing Size</label>
+              <select id="capCsgSize"></select>
+            </div>
+            <div class="field">
+              <label for="capAnnTbgSize">Tubing Size</label>
+              <select id="capAnnTbgSize"></select>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="capCsgWeight">Casing Weight (lb/ft)</label>
+              <select id="capCsgWeight"></select>
+            </div>
+            <div class="field">
+              <label for="capAnnDepth">Depth (ft)</label>
+              <input type="number" id="capAnnDepth" step="1" min="0">
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary" id="capAnnCalcBtn">Calculate</button>
+        <div id="capAnnError"></div>
+        <div id="capAnnResults"></div>
+      </div>
+
+      <!-- Pump Displacement -->
+      <div class="cap-panel" id="capPanel-pd" style="display:none;">
+        <div class="card">
+          <p class="card-label">Pump Displacement</p>
+          <div class="field-row">
+            <div class="field">
+              <label for="capStrokeLength">Stroke Length (in)</label>
+              <input type="number" id="capStrokeLength" step="1" min="0">
+            </div>
+            <div class="field">
+              <label for="capSpm">SPM</label>
+              <input type="number" id="capSpm" step="0.1" min="0">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="capPlungerSize">Plunger Size (in)</label>
+              <input type="number" id="capPlungerSize" step="0.01" min="0">
+            </div>
+            <div class="field">
+              <label for="capPumpEff">Pump Efficiency (0&ndash;1)</label>
+              <input type="number" id="capPumpEff" value="0.8" step="0.01" min="0" max="1">
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary" id="capPdCalcBtn">Calculate</button>
+        <div id="capPdError"></div>
+        <div id="capPdResults"></div>
+      </div>
+
+      <!-- PIP -->
+      <div class="cap-panel" id="capPanel-pip" style="display:none;">
+        <div class="card">
+          <p class="card-label">Pump Intake Pressure (PIP)</p>
+          <div class="field-row">
+            <div class="field">
+              <label for="capNlap">NLAP (ft)</label>
+              <input type="number" id="capNlap" step="1" min="0">
+            </div>
+            <div class="field">
+              <label for="capWaterCut">Water Cut (0&ndash;1)</label>
+              <input type="number" id="capWaterCut" step="0.01" min="0" max="1">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="capOilGradient">Oil Gradient (psi/ft)</label>
+              <input type="number" id="capOilGradient" step="0.001" min="0">
+            </div>
+            <div class="field">
+              <label for="capWaterGradient">Water Gradient (psi/ft)</label>
+              <input type="number" id="capWaterGradient" value="0.433" step="0.001" min="0">
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary" id="capPipCalcBtn">Calculate</button>
+        <div id="capPipError"></div>
+        <div id="capPipResults"></div>
+      </div>
     </div>
   </section>
 
@@ -675,6 +814,11 @@
     l.addEventListener('click', function(){ goToPage(l.dataset.page); });
   });
 
+  // Tapping the header title/logo (top of every page) jumps to Home,
+  // same as tapping the Home entry in the drawer menu.
+  var homeLink = document.getElementById('homeLink');
+  if(homeLink) homeLink.addEventListener('click', function(){ goToPage('home'); });
+
   // deep-link support (#rods, #tubing, etc.)
   var startId = (location.hash || '#home').slice(1);
   if(!document.getElementById('page-' + startId)) startId = 'home';
@@ -689,7 +833,8 @@
   })).concat([
     {id:'calc-unset-pump',icon:'&#128736;', label:'Unset DH Pump',  sub:'Max pull calc'},
     {id:'calc-unset-tac', icon:'&#128736;', label:'Unset TAC',      sub:'Release tension'},
-    {id:'calc-tac-overpull', icon:'&#128736;', label:'TAC Overpull', sub:'Pickup tension'}
+    {id:'calc-tac-overpull', icon:'&#128736;', label:'TAC Overpull', sub:'Pickup tension'},
+    {id:'calc-capacity', icon:'&#128736;', label:'Field Calculators', sub:'Volumes & PIP'}
   ]);
   var homeGrid = document.getElementById('homeGrid');
   homeItems.forEach(function(it){
@@ -1023,50 +1168,52 @@
   }
 
   /**
-   * calculateTACOverpull — converted from tacOverpull.js (Baker Oil Tools
-   * "BAKER .Calc" worksheet). Determines how much tension to pick up on
-   * the tubing before setting the TAC, combining ballooning, gas-pressure,
-   * and thermal tubing-movement effects.
+   * TAC Overpull — three independent methods (Baker, Don-Nan, WFD),
+   * converted from the user's tacOverpull2.js. All three estimate the
+   * same physical quantity (pickup/tension, lb) from the same underlying
+   * tubing-movement effects but structure the terms differently, so they
+   * will NOT produce identical numbers for the same well — shown side by
+   * side for comparison rather than picking one as "correct".
    *
-   * Tubing OD/ID are sourced from tubingData (tubing.json) by size, same
-   * pattern as the other calculators, instead of the sheet's separate
-   * 2-row OD->ID lookup table — more accurate since it uses the exact ID
-   * for that tubing entry rather than an approximate default.
-   *
-   * The sheet uses the literal 3.14 (not full-precision pi) and a fixed
-   * 207 psi/°F thermal coefficient throughout — preserved exactly here so
-   * results match the original workbook.
+   * Baker and Don-Nan source tubing OD/ID from tubingData (tubing.json)
+   * by size, same pattern as the other calculators, instead of a
+   * separate hardcoded OD->ID table. WFD's chart data (empirical lookup
+   * tables read off physical chart paper in the original technique) has
+   * no equivalent in tubing.json — it's fixed reference data specific to
+   * this one method, so it stays embedded here rather than externalized
+   * to JSON.
    */
-  var PI_APPROX = 3.14;
-  var THERMAL_COEFFICIENT_PSI_PER_F = 207;
+  var BAKER_PI_APPROX = 3.14;
+  var BAKER_THERMAL_COEFFICIENT_PSI_PER_F = 207;
 
-  function calculateTACOverpull(inputs){
+  function calculateBakerOverpull(inputs){
     var tbg = findTubingBySize(inputs.tbgSize);
     if(!tbg) throw new Error('No tubing data for size ' + inputs.tbgSize + '.');
 
     var tbgOD = tbg.od_in;
     var tbgID = tbg.tube_id_in;
 
-    var areaOD = (PI_APPROX / 4) * tbgOD * tbgOD;
-    var areaWall = (tbgOD * tbgOD - tbgID * tbgID) * (PI_APPROX / 4);
+    var areaOD = (BAKER_PI_APPROX / 4) * tbgOD * tbgOD;
+    var areaWall = (tbgOD * tbgOD - tbgID * tbgID) * (BAKER_PI_APPROX / 4);
 
     var deltaTempF = inputs.surfaceFluidTempF - inputs.yearlyMeanTempF;
 
     var f1Ballooning = areaOD * inputs.fluidGradientPsiPerFt *
-      (inputs.workingFluidLevelFt * ((0.3 * inputs.workingFluidLevelFt) / inputs.pumpDepthFt + 0.4));
+      (inputs.operatingFluidLevelFt * ((0.3 * inputs.operatingFluidLevelFt) / inputs.pumpDepthFt + 0.4));
 
     var f2Ballooning = areaOD * inputs.fluidGradientPsiPerFt *
       ((tbgOD * tbgOD - tbgID * tbgID) / (tbgOD * tbgOD)) *
-      inputs.fluidLevelAtAnchorSetFt *
-      ((0.3 * inputs.fluidLevelAtAnchorSetFt) / inputs.pumpDepthFt + 0.4);
+      inputs.installFluidLevelFt *
+      ((0.3 * inputs.installFluidLevelFt) / inputs.pumpDepthFt + 0.4);
 
     var f3GasPressure = areaOD * 0.4 * (inputs.gasPressurePsi || 0);
 
-    var f4Thermal = THERMAL_COEFFICIENT_PSI_PER_F * areaWall * (deltaTempF / 2);
+    var f4Thermal = BAKER_THERMAL_COEFFICIENT_PSI_PER_F * areaWall * (deltaTempF / 2);
 
     var pickupLb = f1Ballooning - f2Ballooning - f3GasPressure + f4Thermal;
 
     return {
+      method: 'Baker',
       tbg: { od: tbgOD, id: tbgID, areaOD: areaOD, areaWall: areaWall },
       deltaTempF: deltaTempF,
       f1Ballooning: f1Ballooning,
@@ -1074,6 +1221,173 @@
       f3GasPressure: f3GasPressure,
       f4Thermal: f4Thermal,
       pickupLb: pickupLb
+    };
+  }
+
+  function calculateDonNanOverpull(inputs){
+    var tbg = findTubingBySize(inputs.tbgSize);
+    if(!tbg) throw new Error('No tubing data for size ' + inputs.tbgSize + '.');
+
+    var tbgOD = tbg.od_in;
+    var tbgID = tbg.tube_id_in;
+    var thermalExpansionCoeff = inputs.thermalExpansionCoeff || 0.0000069;
+
+    var areaFactor = (Math.PI / 4) * (tbgOD * tbgOD - tbgID * tbgID);
+    var idAreaFactor = (Math.PI / 4) * (tbgID * tbgID);
+
+    var buoyancyForce = 0.433 * inputs.specificGravity *
+      (inputs.tacDepthFt - inputs.installFluidLevelFt) * areaFactor;
+
+    var pistonEffect = 0.433 * inputs.specificGravity * inputs.operatingFluidLevelFt * idAreaFactor;
+
+    var balloonEffect = 2 * 0.3 * (Math.PI / 4) * 0.433 * inputs.specificGravity *
+      (tbgID * tbgID * inputs.psnDepthFt -
+       tbgOD * tbgOD * (inputs.operatingFluidLevelFt - inputs.installFluidLevelFt));
+
+    var tempEffect = thermalExpansionCoeff * 30 * Math.pow(10, 6) *
+      (inputs.surfaceFluidTempF - inputs.yearlyMeanTempF) * areaFactor;
+
+    var stretchConstant = 0.4 / areaFactor;
+
+    var finalForceLb = pistonEffect + tempEffect - buoyancyForce - balloonEffect;
+
+    return {
+      method: 'Don-Nan',
+      tbg: { od: tbgOD, id: tbgID },
+      thermalExpansionCoeff: thermalExpansionCoeff,
+      buoyancyForce: buoyancyForce,
+      pistonEffect: pistonEffect,
+      balloonEffect: balloonEffect,
+      tempEffect: tempEffect,
+      stretchConstant: stretchConstant,
+      finalForceLb: finalForceLb
+    };
+  }
+
+  // WFD method — chart/table lookup (not a closed-form equation). Chart
+  // data transcribed from the source workbook's raw chart columns.
+  var WFD_CHART_A_X = [10,20,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200];
+  var WFD_CHART_BC_X = [500,1000,1500,2000,2500,3000,3500,4000,4500,5000,5500,6000,6500,7000,7500,8000,8500,9000,9500,10000];
+  var DEFAULT_WFD_CHART_TABLE = [
+    { od: 2.375, label: '2-3/8"',
+      chartA: [1400,2700,4100,5400,6800,8100,9500,10800,12200,13500,14900,16200,17600,18900,20300,21600,23000,24500,25700,27000],
+      chartB: [800,1600,2400,3100,3900,4700,5500,6200,7000,7800,8600,9300,10100,10900,11700,12400,13200,14000,14800,15550],
+      chartC: [200,400,600,900,1100,1300,1500,1800,2000,2200,2500,2700,2900,3100,3400,3600,3800,4100,4300,4500] },
+    { od: 2.875, label: '2-7/8"',
+      chartA: [1900,3800,5700,7500,9400,11300,13200,15000,16900,18800,20700,22500,24400,26300,28200,30000,31900,33800,35700,37500],
+      chartB: [1200,2300,3400,4600,5700,6800,8000,9100,10300,11400,12500,13700,14800,15900,17100,18200,19300,20500,21600,22800],
+      chartC: [300,600,900,1200,1500,1900,2200,2500,2800,3100,3400,3800,4100,4400,4700,5000,5300,5700,6000,6300] },
+    { od: 3.5, label: '3 1/2"',
+      chartA: [2700,5400,8100,10800,13400,16100,18800,21500,24200,26800,29500,32200,34900,37600,40200,42900,45600,48300,51000,53700],
+      chartB: [1700,3400,5100,6800,8500,10100,11800,13500,15200,16900,18600,20200,21900,23600,25300,27000,28700,30300,32000,33700],
+      chartC: [400,900,1300,1800,2200,2700,3100,3600,4000,4500,4900,5400,5800,6300,6700,7200,7700,8100,8600,9000] }
+  ];
+
+  function mround(number, multiple){ return Math.round(number / multiple) * multiple; }
+
+  function lookupChart(xRounded, xAxis, yValues, chartName){
+    var idx = xAxis.indexOf(xRounded);
+    if(idx === -1){
+      throw new Error(chartName + ': value ' + xRounded + ' is outside the chart\'s range (' + xAxis[0] + '-' + xAxis[xAxis.length-1] + ').');
+    }
+    return yValues[idx];
+  }
+
+  function calculateWfdOverpull(inputs){
+    var tbg = findTubingBySize(inputs.tbgSize);
+    if(!tbg) throw new Error('No tubing data for size ' + inputs.tbgSize + '.');
+    var tbgOD = tbg.od_in;
+
+    var sizeRow = DEFAULT_WFD_CHART_TABLE.find(function(r){ return r.od === tbgOD; });
+    if(!sizeRow) throw new Error('No WFD chart data for OD ' + tbgOD + '.');
+
+    var operatingFluidLevelRounded = mround(inputs.operatingFluidLevelFt, 500);
+    var installFluidLevelRounded = mround(inputs.installFluidLevelFt, 500);
+    var tempDiffRounded = mround(inputs.surfaceFluidTempF - inputs.yearlyMeanTempF, 10);
+
+    var chartATempEffect = lookupChart(tempDiffRounded, WFD_CHART_A_X, sizeRow.chartA, 'Chart A (Temp Effect)');
+    var chartBOperatingFLEffect = lookupChart(operatingFluidLevelRounded, WFD_CHART_BC_X, sizeRow.chartB, 'Chart B (Operating FL effect)');
+    var chartCInitialFLEffect = lookupChart(installFluidLevelRounded, WFD_CHART_BC_X, sizeRow.chartC, 'Chart C (Initial FL effect)');
+
+    var totalTensionLb = chartATempEffect + chartBOperatingFLEffect - chartCInitialFLEffect;
+
+    return {
+      method: 'WFD',
+      tbg: { od: tbgOD, label: sizeRow.label },
+      operatingFluidLevelRounded: operatingFluidLevelRounded,
+      installFluidLevelRounded: installFluidLevelRounded,
+      tempDiffRounded: tempDiffRounded,
+      chartATempEffect: chartATempEffect,
+      chartBOperatingFLEffect: chartBOperatingFLEffect,
+      chartCInitialFLEffect: chartCInitialFLEffect,
+      totalTensionLb: totalTensionLb
+    };
+  }
+
+  // Runs all three methods off one shared input object. Each method is
+  // wrapped independently so one method being out of range (WFD's chart
+  // limits, most likely) never blocks the other two from showing.
+  function calculateAllTACOverpulls(inputs){
+    var out = { baker: null, bakerError: null, donNan: null, donNanError: null, wfd: null, wfdError: null };
+    try{ out.baker = calculateBakerOverpull(inputs); }catch(e){ out.bakerError = e.message; }
+    try{ out.donNan = calculateDonNanOverpull(inputs); }catch(e){ out.donNanError = e.message; }
+    try{ out.wfd = calculateWfdOverpull(inputs); }catch(e){ out.wfdError = e.message; }
+    return out;
+  }
+
+  /**
+   * Field Calculators — four small, unrelated field calcs bundled
+   * together, converted from capacityHelpers.js. TBG capacity is
+   * sourced from tubingData (tubing.json)'s existing capacity_bbl_ft
+   * field, same pattern as the other calculators. Annulus capacity's
+   * casing x tubing x casing-weight table has no equivalent in
+   * tubing.json (it's casing-specific reference data) — kept embedded
+   * here as fixed data, same treatment as the WFD charts above.
+   */
+  var DEFAULT_ANNULUS_CAPACITY_TABLE = [
+    { csgSize: '7"', tbgSize: '3.5"', csgWeight: 29, capPerFt: 0.02524 },
+    { csgSize: '7"', tbgSize: '3.5"', csgWeight: 26, capPerFt: 0.02639 },
+    { csgSize: '7"', tbgSize: '2 7/8"', csgWeight: 29, capPerFt: 0.02911 },
+    { csgSize: '7"', tbgSize: '2 7/8"', csgWeight: 26, capPerFt: 0.03023 },
+    { csgSize: '9 5/8"', tbgSize: '3.5"', csgWeight: 47, capPerFt: 0.0613 },
+    { csgSize: '9 5/8"', tbgSize: '3.5"', csgWeight: 43, capPerFt: 0.06255 },
+    { csgSize: '9 5/8"', tbgSize: '3.5"', csgWeight: 36, capPerFt: 0.0654 },
+    { csgSize: '9 5/8"', tbgSize: '2 7/8"', csgWeight: 47, capPerFt: 0.06517 },
+    { csgSize: '9 5/8"', tbgSize: '2 7/8"', csgWeight: 43, capPerFt: 0.06642 },
+    { csgSize: '9 5/8"', tbgSize: '2 7/8"', csgWeight: 36, capPerFt: 0.06927 }
+  ];
+
+  function calculateTbgCapacityHelper(inputs){
+    var tbg = findTubingBySize(inputs.tbgSize);
+    if(!tbg) throw new Error('No tubing data for size ' + inputs.tbgSize + '.');
+    var capacityBbl = tbg.capacity_bbl_ft * inputs.depthFt;
+    return { tbgSize: inputs.tbgSize, capPerFt: tbg.capacity_bbl_ft, depthFt: inputs.depthFt, capacityBbl: capacityBbl };
+  }
+
+  function calculateAnnulusCapacity(inputs){
+    var row = DEFAULT_ANNULUS_CAPACITY_TABLE.find(function(r){
+      return r.csgSize === inputs.csgSize && r.tbgSize === inputs.tbgSize && r.csgWeight === inputs.csgWeight;
+    });
+    if(!row) throw new Error('No annulus capacity found for ' + inputs.csgSize + ' CSG x ' + inputs.tbgSize + ' TBG @ ' + inputs.csgWeight + '#.');
+    var capacityBbl = row.capPerFt * inputs.depthFt;
+    return { csgSize: inputs.csgSize, tbgSize: inputs.tbgSize, csgWeight: inputs.csgWeight, capPerFt: row.capPerFt, depthFt: inputs.depthFt, capacityBbl: capacityBbl };
+  }
+
+  function calculatePumpDisplacement(inputs){
+    var displacementBblPerDay = 0.1166 * inputs.strokeLengthIn * inputs.spm * inputs.plungerSizeIn * inputs.plungerSizeIn * inputs.pumpEfficiency;
+    return {
+      strokeLengthIn: inputs.strokeLengthIn, spm: inputs.spm, plungerSizeIn: inputs.plungerSizeIn,
+      pumpEfficiency: inputs.pumpEfficiency, displacementBblPerDay: displacementBblPerDay
+    };
+  }
+
+  function calculatePIP(inputs){
+    var waterGradientPsiPerFt = inputs.waterGradientPsiPerFt !== undefined ? inputs.waterGradientPsiPerFt : 0.433;
+    var fluidGradientPsiPerFt = inputs.waterCut * waterGradientPsiPerFt + inputs.oilGradientPsiPerFt * (1 - inputs.waterCut);
+    var pipPsi = fluidGradientPsiPerFt * inputs.nlapFt;
+    return {
+      nlapFt: inputs.nlapFt, waterCut: inputs.waterCut, oilGradientPsiPerFt: inputs.oilGradientPsiPerFt,
+      waterGradientPsiPerFt: waterGradientPsiPerFt, fluidGradientPsiPerFt: fluidGradientPsiPerFt, pipPsi: pipPsi
     };
   }
 
@@ -1279,9 +1593,16 @@
     }
   }
 
-  /* ---------- TAC Overpull calculator UI ---------- */
+  /* ---------- TAC Overpull calculator UI (3 methods) ---------- */
   function topTbgOptions(){
     return tubingData.sizes.map(function(t){ return '<option value="'+t.size+'">'+t.size+'&Prime; ('+t.grade+')</option>'; }).join('');
+  }
+
+  function methodResultRow(label, value, errorMsg){
+    if(errorMsg){
+      return '<div class="kv"><span class="k">'+label+'</span><span class="v" style="color:var(--warn);font-size:.78rem;">'+errorMsg+'</span></div>';
+    }
+    return '<div class="kv"><span class="k">'+label+'</span><span class="v">'+fmtNum(Math.round(value))+' lbf</span></div>';
   }
 
   function runTacOverpullCalculation(){
@@ -1290,41 +1611,222 @@
     errEl.innerHTML = '';
     resEl.innerHTML = '';
     try{
-      var result = calculateTACOverpull({
+      var installFluidLevelFt = parseFloat(document.getElementById('topX1').value) || 0;
+      var operatingFluidLevelFt = parseFloat(document.getElementById('topX2').value) || 0;
+      var pumpDepthFt = parseFloat(document.getElementById('topPumpDepth').value) || 0;
+      var fluidGradientPsiPerFt = parseFloat(document.getElementById('topFluidGradient').value) || 0;
+
+      var sharedInputs = {
         tbgSize: document.getElementById('topTbgSize').value,
-        fluidGradientPsiPerFt: parseFloat(document.getElementById('topFluidGradient').value) || 0,
-        fluidLevelAtAnchorSetFt: parseFloat(document.getElementById('topX1').value) || 0,
-        workingFluidLevelFt: parseFloat(document.getElementById('topX2').value) || 0,
-        pumpDepthFt: parseFloat(document.getElementById('topPumpDepth').value) || 0,
-        gasPressurePsi: parseFloat(document.getElementById('topGasPressure').value) || 0,
+        installFluidLevelFt: installFluidLevelFt,
+        operatingFluidLevelFt: operatingFluidLevelFt,
         surfaceFluidTempF: parseFloat(document.getElementById('topSurfaceTemp').value) || 0,
-        yearlyMeanTempF: parseFloat(document.getElementById('topYearlyTemp').value) || 0
-      });
+        yearlyMeanTempF: parseFloat(document.getElementById('topYearlyTemp').value) || 0,
+        // Baker-specific
+        fluidGradientPsiPerFt: fluidGradientPsiPerFt,
+        pumpDepthFt: pumpDepthFt,
+        gasPressurePsi: parseFloat(document.getElementById('topGasPressure').value) || 0,
+        // Don-Nan-specific — derived from the Baker/shared inputs above
+        // instead of separate fields, per field convention: Specific
+        // Gravity reuses the Fluid Gradient value, Net Liquid Above
+        // Install / Operating Fluid Above Pump / PSN Depth are all
+        // computed from Pump Depth. TAC Depth is the only value Don-Nan
+        // still needs on its own. Thermal Expansion Coefficient keeps
+        // its standard default (calculateDonNanOverpull falls back to
+        // 0.0000069 when not supplied) — not exposed as a field.
+        specificGravity: fluidGradientPsiPerFt,
+        tacDepthFt: parseFloat(document.getElementById('topTacDepth').value) || 0,
+        netLiquidAboveInstallFt: pumpDepthFt - installFluidLevelFt,
+        operatingFluidAbovePumpFt: pumpDepthFt - operatingFluidLevelFt,
+        psnDepthFt: pumpDepthFt
+      };
+
+      var all = calculateAllTACOverpulls(sharedInputs);
 
       var html = '';
-      html += '<div class="card result-card"><div class="result-hero">'+
-        '<div class="lbl">Pickup (Overpull)</div>'+
-        '<div class="val">'+fmtNum(Math.round(result.pickupLb)) + ' <small>lbf</small></div>'+
-        '</div>'+
-        '<div class="kv"><span class="k">Tubing OD</span><span class="v">'+result.tbg.od.toFixed(3)+'&Prime;</span></div>'+
-        '<div class="kv"><span class="k">Tubing ID</span><span class="v">'+result.tbg.id.toFixed(3)+'&Prime;</span></div>'+
-        '<div class="kv"><span class="k">Area OD</span><span class="v">'+result.tbg.areaOD.toFixed(3)+' sq.in</span></div>'+
-        '<div class="kv"><span class="k">Area Wall</span><span class="v">'+result.tbg.areaWall.toFixed(3)+' sq.in</span></div>'+
+      html += '<div class="card result-card"><p class="card-label">Comparison &mdash; All 3 Methods</p>'+
+        methodResultRow('Baker &mdash; Pickup', all.baker ? all.baker.pickupLb : null, all.bakerError) +
+        methodResultRow('Don-Nan &mdash; Final Force', all.donNan ? all.donNan.finalForceLb : null, all.donNanError) +
+        methodResultRow('WFD &mdash; Total Tension', all.wfd ? all.wfd.totalTensionLb : null, all.wfdError) +
         '</div>';
 
-      html += '<div class="card"><p class="card-label">Effect Breakdown</p>'+
-        '<div class="kv"><span class="k">F1 &mdash; Ballooning @ X2</span><span class="v">'+fmtNum(result.f1Ballooning)+' lb</span></div>'+
-        '<div class="kv"><span class="k">F2 &mdash; Ballooning @ X1</span><span class="v">'+fmtNum(result.f2Ballooning)+' lb</span></div>'+
-        '<div class="kv"><span class="k">F3 &mdash; Gas Pressure</span><span class="v">'+fmtNum(result.f3GasPressure)+' lb</span></div>'+
-        '<div class="kv"><span class="k">F4 &mdash; Thermal</span><span class="v">'+fmtNum(result.f4Thermal)+' lb</span></div>'+
-        '<div class="kv"><span class="k">&Delta;t (T1 &minus; T2)</span><span class="v">'+result.deltaTempF.toFixed(1)+' &deg;F</span></div>'+
-        '</div>'+
-        '<p class="note">Pickup = F1 &minus; F2 &minus; F3 + F4. Apply this much tension/slack when setting the TAC so the tubing lands at neutral length once producing.</p>';
+      if(all.baker){
+        var b = all.baker;
+        html += '<div class="card"><p class="card-label">Baker &mdash; Breakdown</p>'+
+          '<div class="kv"><span class="k">Tubing OD / ID</span><span class="v">'+b.tbg.od.toFixed(3)+'&Prime; / '+b.tbg.id.toFixed(3)+'&Prime;</span></div>'+
+          '<div class="kv"><span class="k">F1 &mdash; Ballooning @ X2</span><span class="v">'+fmtNum(b.f1Ballooning)+' lb</span></div>'+
+          '<div class="kv"><span class="k">F2 &mdash; Ballooning @ X1</span><span class="v">'+fmtNum(b.f2Ballooning)+' lb</span></div>'+
+          '<div class="kv"><span class="k">F3 &mdash; Gas Pressure</span><span class="v">'+fmtNum(b.f3GasPressure)+' lb</span></div>'+
+          '<div class="kv"><span class="k">F4 &mdash; Thermal</span><span class="v">'+fmtNum(b.f4Thermal)+' lb</span></div>'+
+          '<div class="kv"><span class="k">&Delta;t (T1 &minus; T2)</span><span class="v">'+b.deltaTempF.toFixed(1)+' &deg;F</span></div>'+
+          '</div>';
+      }
+      if(all.donNan){
+        var d = all.donNan;
+        html += '<div class="card"><p class="card-label">Don-Nan &mdash; Breakdown</p>'+
+          '<div class="kv"><span class="k">Tubing OD / ID</span><span class="v">'+d.tbg.od.toFixed(3)+'&Prime; / '+d.tbg.id.toFixed(3)+'&Prime;</span></div>'+
+          '<div class="kv"><span class="k">Buoyancy Force</span><span class="v">'+fmtNum(d.buoyancyForce)+' lb</span></div>'+
+          '<div class="kv"><span class="k">Piston Effect</span><span class="v">'+fmtNum(d.pistonEffect)+' lb</span></div>'+
+          '<div class="kv"><span class="k">Ballooning Effect</span><span class="v">'+fmtNum(d.balloonEffect)+' lb</span></div>'+
+          '<div class="kv"><span class="k">Temp Effect</span><span class="v">'+fmtNum(d.tempEffect)+' lb</span></div>'+
+          '<div class="kv"><span class="k">Stretch Constant</span><span class="v">'+d.stretchConstant.toFixed(4)+'</span></div>'+
+          '</div>';
+      }
+      if(all.wfd){
+        var w = all.wfd;
+        html += '<div class="card"><p class="card-label">WFD &mdash; Breakdown</p>'+
+          '<div class="kv"><span class="k">Tubing Size</span><span class="v">'+w.tbg.label+'</span></div>'+
+          '<div class="kv"><span class="k">Chart A &mdash; Temp Effect</span><span class="v">'+fmtNum(w.chartATempEffect)+' lb</span></div>'+
+          '<div class="kv"><span class="k">Chart B &mdash; Operating FL Effect</span><span class="v">'+fmtNum(w.chartBOperatingFLEffect)+' lb</span></div>'+
+          '<div class="kv"><span class="k">Chart C &mdash; Initial FL Effect</span><span class="v">'+fmtNum(w.chartCInitialFLEffect)+' lb</span></div>'+
+          '<div class="kv"><span class="k">&Delta;t Rounded (nearest 10)</span><span class="v">'+w.tempDiffRounded+' &deg;F</span></div>'+
+          '</div>';
+      }
+
+      html += '<p class="note">All 3 methods estimate the same pickup/tension force from the same underlying ballooning, pressure, and thermal effects, but structure the terms differently — they will not agree exactly. Shown side by side for comparison, not to pick a single "correct" answer.</p>';
 
       resEl.innerHTML = html;
     }catch(e){
       errEl.innerHTML = '<div class="calc-error">'+e.message+'</div>';
     }
+  }
+
+  /* ---------- Field Calculators UI ---------- */
+  var CAPACITY_TABS = [
+    { id: 'tbg', label: 'TBG Capacity' },
+    { id: 'annulus', label: 'Annulus' },
+    { id: 'pd', label: 'Pump Displacement' },
+    { id: 'pip', label: 'PIP' }
+  ];
+
+  function initCapacityTabs(){
+    var wrap = document.getElementById('capacityTabs');
+    wrap.innerHTML = '';
+    CAPACITY_TABS.forEach(function(t, i){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'tab-btn' + (i === 0 ? ' active' : '');
+      b.textContent = t.label;
+      b.addEventListener('click', function(){
+        wrap.querySelectorAll('.tab-btn').forEach(function(x){ x.classList.remove('active'); });
+        b.classList.add('active');
+        CAPACITY_TABS.forEach(function(t2){
+          document.getElementById('capPanel-' + t2.id).style.display = (t2.id === t.id) ? 'block' : 'none';
+        });
+      });
+      wrap.appendChild(b);
+    });
+  }
+
+  function capTbgOptions(){
+    return tubingData.sizes.map(function(t){ return '<option value="'+t.size+'">'+t.size+'&Prime;</option>'; }).join('');
+  }
+
+  function runCapTbgCalculation(){
+    var errEl = document.getElementById('capTbgError');
+    var resEl = document.getElementById('capTbgResults');
+    errEl.innerHTML = ''; resEl.innerHTML = '';
+    try{
+      var result = calculateTbgCapacityHelper({
+        tbgSize: document.getElementById('capTbgSize').value,
+        depthFt: parseFloat(document.getElementById('capTbgDepth').value) || 0
+      });
+      resEl.innerHTML = '<div class="card result-card"><div class="result-hero">'+
+        '<div class="lbl">Tubing Capacity</div>'+
+        '<div class="val">'+result.capacityBbl.toFixed(2)+' <small>bbl</small></div>'+
+        '</div>'+
+        '<div class="kv"><span class="k">Capacity per ft</span><span class="v">'+result.capPerFt.toFixed(5)+' bbl/ft</span></div>'+
+        '</div>';
+    }catch(e){ errEl.innerHTML = '<div class="calc-error">'+e.message+'</div>'; }
+  }
+
+  // Annulus tab: casing/tubing/weight selects are interdependent — the
+  // weight dropdown filters to whichever combos actually exist for the
+  // selected casing + tubing size, since not every combo has every weight.
+  // Casing/tubing size labels contain a literal " (inch mark), which
+  // breaks a double-quoted HTML attribute if inserted raw — escape it.
+  function escAttr(str){ return String(str).replace(/"/g, '&quot;'); }
+
+  function capAnnUniqueValues(key, filter){
+    var seen = [];
+    DEFAULT_ANNULUS_CAPACITY_TABLE.forEach(function(r){
+      var matches = Object.keys(filter || {}).every(function(k){ return r[k] === filter[k]; });
+      if(matches && seen.indexOf(r[key]) === -1) seen.push(r[key]);
+    });
+    return seen;
+  }
+  function refreshCapAnnWeightOptions(){
+    var csgSize = document.getElementById('capCsgSize').value;
+    var tbgSize = document.getElementById('capAnnTbgSize').value;
+    var weights = capAnnUniqueValues('csgWeight', { csgSize: csgSize, tbgSize: tbgSize });
+    document.getElementById('capCsgWeight').innerHTML = weights.map(function(w){ return '<option value="'+w+'">'+w+'#</option>'; }).join('');
+  }
+  function initCapAnnSelects(){
+    var csgSizes = capAnnUniqueValues('csgSize', {});
+    var tbgSizes = capAnnUniqueValues('tbgSize', {});
+    document.getElementById('capCsgSize').innerHTML = csgSizes.map(function(s){ return '<option value="'+escAttr(s)+'">'+s+'</option>'; }).join('');
+    document.getElementById('capAnnTbgSize').innerHTML = tbgSizes.map(function(s){ return '<option value="'+escAttr(s)+'">'+s+'</option>'; }).join('');
+    refreshCapAnnWeightOptions();
+    document.getElementById('capCsgSize').addEventListener('change', refreshCapAnnWeightOptions);
+    document.getElementById('capAnnTbgSize').addEventListener('change', refreshCapAnnWeightOptions);
+  }
+
+  function runCapAnnCalculation(){
+    var errEl = document.getElementById('capAnnError');
+    var resEl = document.getElementById('capAnnResults');
+    errEl.innerHTML = ''; resEl.innerHTML = '';
+    try{
+      var result = calculateAnnulusCapacity({
+        csgSize: document.getElementById('capCsgSize').value,
+        tbgSize: document.getElementById('capAnnTbgSize').value,
+        csgWeight: parseFloat(document.getElementById('capCsgWeight').value),
+        depthFt: parseFloat(document.getElementById('capAnnDepth').value) || 0
+      });
+      resEl.innerHTML = '<div class="card result-card"><div class="result-hero">'+
+        '<div class="lbl">Annulus Capacity</div>'+
+        '<div class="val">'+result.capacityBbl.toFixed(2)+' <small>bbl</small></div>'+
+        '</div>'+
+        '<div class="kv"><span class="k">Capacity per ft</span><span class="v">'+result.capPerFt.toFixed(5)+' bbl/ft</span></div>'+
+        '</div>';
+    }catch(e){ errEl.innerHTML = '<div class="calc-error">'+e.message+'</div>'; }
+  }
+
+  function runCapPdCalculation(){
+    var errEl = document.getElementById('capPdError');
+    var resEl = document.getElementById('capPdResults');
+    errEl.innerHTML = ''; resEl.innerHTML = '';
+    try{
+      var result = calculatePumpDisplacement({
+        strokeLengthIn: parseFloat(document.getElementById('capStrokeLength').value) || 0,
+        spm: parseFloat(document.getElementById('capSpm').value) || 0,
+        plungerSizeIn: parseFloat(document.getElementById('capPlungerSize').value) || 0,
+        pumpEfficiency: parseFloat(document.getElementById('capPumpEff').value) || 0
+      });
+      resEl.innerHTML = '<div class="card result-card"><div class="result-hero">'+
+        '<div class="lbl">Pump Displacement</div>'+
+        '<div class="val">'+fmtNum(Math.round(result.displacementBblPerDay))+' <small>bbl/day</small></div>'+
+        '</div></div>';
+    }catch(e){ errEl.innerHTML = '<div class="calc-error">'+e.message+'</div>'; }
+  }
+
+  function runCapPipCalculation(){
+    var errEl = document.getElementById('capPipError');
+    var resEl = document.getElementById('capPipResults');
+    errEl.innerHTML = ''; resEl.innerHTML = '';
+    try{
+      var result = calculatePIP({
+        nlapFt: parseFloat(document.getElementById('capNlap').value) || 0,
+        waterCut: parseFloat(document.getElementById('capWaterCut').value) || 0,
+        oilGradientPsiPerFt: parseFloat(document.getElementById('capOilGradient').value) || 0,
+        waterGradientPsiPerFt: parseFloat(document.getElementById('capWaterGradient').value) || 0.433
+      });
+      resEl.innerHTML = '<div class="card result-card"><div class="result-hero">'+
+        '<div class="lbl">Pump Intake Pressure (PIP)</div>'+
+        '<div class="val">'+fmtNum(Math.round(result.pipPsi))+' <small>psi</small></div>'+
+        '</div>'+
+        '<div class="kv"><span class="k">Blended Fluid Gradient</span><span class="v">'+result.fluidGradientPsiPerFt.toFixed(4)+' psi/ft</span></div>'+
+        '</div>';
+    }catch(e){ errEl.innerHTML = '<div class="calc-error">'+e.message+'</div>'; }
   }
 
   /* ---------- Wire up all calculators once data is ready ---------- */
@@ -1353,11 +1855,22 @@
     document.getElementById('tacAddRod').addEventListener('click', addTacRodRow);
     document.getElementById('tacCalcBtn').addEventListener('click', runTacCalculation);
 
-    // TAC Overpull
+    // TAC Overpull (3 methods)
     document.getElementById('tacOverpullNotReady').style.display = 'none';
     document.getElementById('tacOverpullForm').style.display = 'block';
     document.getElementById('topTbgSize').innerHTML = topTbgOptions();
     document.getElementById('topCalcBtn').addEventListener('click', runTacOverpullCalculation);
+
+    // Field Calculators
+    document.getElementById('capacityNotReady').style.display = 'none';
+    document.getElementById('capacityFormWrap').style.display = 'block';
+    initCapacityTabs();
+    document.getElementById('capTbgSize').innerHTML = capTbgOptions();
+    initCapAnnSelects();
+    document.getElementById('capTbgCalcBtn').addEventListener('click', runCapTbgCalculation);
+    document.getElementById('capAnnCalcBtn').addEventListener('click', runCapAnnCalculation);
+    document.getElementById('capPdCalcBtn').addEventListener('click', runCapPdCalculation);
+    document.getElementById('capPipCalcBtn').addEventListener('click', runCapPipCalculation);
   }
 
   /* ---------------------------------------------------------------

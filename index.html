@@ -1344,18 +1344,35 @@
    * tubing.json (it's casing-specific reference data) — kept embedded
    * here as fixed data, same treatment as the WFD charts above.
    */
-  var DEFAULT_ANNULUS_CAPACITY_TABLE = [
+var DEFAULT_ANNULUS_CAPACITY_TABLE = [
+    // 5 1/2" Casing
+    { csgSize: '5 1/2"', tbgSize: '2 7/8"', csgWeight: 14,   capPerFt: 0.01637 },
+    { csgSize: '5 1/2"', tbgSize: '2 7/8"', csgWeight: 15.5, capPerFt: 0.01577 },
+    { csgSize: '5 1/2"', tbgSize: '2 7/8"', csgWeight: 17,   capPerFt: 0.01522 },
+    { csgSize: '5 1/2"', tbgSize: '2 7/8"', csgWeight: 20,   capPerFt: 0.01415 },
+    { csgSize: '5 1/2"', tbgSize: '2 3/8"', csgWeight: 14,   capPerFt: 0.01892 },
+    { csgSize: '5 1/2"', tbgSize: '2 3/8"', csgWeight: 15.5, capPerFt: 0.01832 },
+    { csgSize: '5 1/2"', tbgSize: '2 3/8"', csgWeight: 17,   capPerFt: 0.01777 },
+    { csgSize: '5 1/2"', tbgSize: '2 3/8"', csgWeight: 20,   capPerFt: 0.01670 },
+    { csgSize: '5 1/2"', tbgSize: '3.5"',   csgWeight: 14,   capPerFt: 0.01250 },
+    { csgSize: '5 1/2"', tbgSize: '3.5"',   csgWeight: 15.5, capPerFt: 0.01190 },
+    { csgSize: '5 1/2"', tbgSize: '3.5"',   csgWeight: 17,   capPerFt: 0.01135 },
+    { csgSize: '5 1/2"', tbgSize: '3.5"',   csgWeight: 20,   capPerFt: 0.01028 },
+
+    // 7" Casing
     { csgSize: '7"', tbgSize: '3.5"', csgWeight: 29, capPerFt: 0.02524 },
     { csgSize: '7"', tbgSize: '3.5"', csgWeight: 26, capPerFt: 0.02639 },
     { csgSize: '7"', tbgSize: '2 7/8"', csgWeight: 29, capPerFt: 0.02911 },
     { csgSize: '7"', tbgSize: '2 7/8"', csgWeight: 26, capPerFt: 0.03023 },
+
+    // 9 5/8" Casing
     { csgSize: '9 5/8"', tbgSize: '3.5"', csgWeight: 47, capPerFt: 0.0613 },
     { csgSize: '9 5/8"', tbgSize: '3.5"', csgWeight: 43, capPerFt: 0.06255 },
     { csgSize: '9 5/8"', tbgSize: '3.5"', csgWeight: 36, capPerFt: 0.0654 },
     { csgSize: '9 5/8"', tbgSize: '2 7/8"', csgWeight: 47, capPerFt: 0.06517 },
     { csgSize: '9 5/8"', tbgSize: '2 7/8"', csgWeight: 43, capPerFt: 0.06642 },
     { csgSize: '9 5/8"', tbgSize: '2 7/8"', csgWeight: 36, capPerFt: 0.06927 }
-  ];
+];
 
   function calculateTbgCapacityHelper(inputs){
     var tbg = findTubingBySize(inputs.tbgSize);

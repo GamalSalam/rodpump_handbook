@@ -13,7 +13,7 @@
  * those are picked up automatically the next time the user is online).
  */
 
-var CACHE_VERSION = 'rph-cache-v1';
+var CACHE_VERSION = 'rodBook-cache-v1';
 
 var CORE_ASSETS = [
   './',

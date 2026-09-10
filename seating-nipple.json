@@ -3,13 +3,16 @@
     "note": "Seating Nipple (SN) configuration file matching API mechanical top lock standards.",
     "last_updated": "2026-09-10"
   },
-  "image": "images/seating-nipple-diagram.jpg",
   "intro": "Dimensional specifications for Pump Seating Nipples, including custom rings and API Table C.32 (N14 Mechanical Top Lock) standards.",
   "sections": [],
   "tabs": [
     {
       "label": "Pump Seating Nipple Basic Dimensions",
       "sections": [
+        {
+          "type": "image",
+          "src": "images/seating-nipple-diagram.jpg"
+        },
         {
           "type": "table",
           "heading": "Table C.32 — N14 Nipple, Seating, Mechanical Top Lock",

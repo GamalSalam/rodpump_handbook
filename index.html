@@ -318,8 +318,8 @@
     <div id="referenceDrawerLinks"></div>
 
     <div class="drawer-group-label">Calculators</div>
-    <button class="drawer-link" data-page="calc-unset-pump"><span class="dot"></span>Unset DH Pump</button>
-    <button class="drawer-link" data-page="calc-unset-tac"><span class="dot"></span>Unset TAC</button>
+    <button class="drawer-link" data-page="calc-unset-pump"><span class="dot"></span>Unseat DH Pump</button>
+    <button class="drawer-link" data-page="calc-unset-tac"><span class="dot"></span>Unseat TAC</button>
     <button class="drawer-link" data-page="calc-tac-overpull"><span class="dot"></span>TAC Overpull</button>
     <button class="drawer-link" data-page="calc-capacity"><span class="dot"></span>Field Calculators</button>
   </div>
@@ -375,9 +375,9 @@
        comment marks where they get inserted in the DOM. -->
 
   <!-- CALC: UNSET DH PUMP -->
-  <section class="page" id="page-calc-unset-pump" data-title="Unset DH Pump">
+  <section class="page" id="page-calc-unset-pump" data-title="Unseat DH Pump">
     <p class="eyebrow">Calculator</p>
-    <h1>Unset Downhole Pump</h1>
+    <h1>Unseat Downhole Pump</h1>
     <p class="section-sub">Max allowable overpull to unseat the pump without rod damage.</p>
 
     <div id="dhpNotReady" class="card stub">
@@ -425,10 +425,10 @@
   </section>
 
   <!-- CALC: UNSET TAC -->
-  <section class="page" id="page-calc-unset-tac" data-title="Unset TAC">
+  <section class="page" id="page-calc-unset-tac" data-title="Unseat TAC">
     <p class="eyebrow">Calculator</p>
-    <h1>Unset TAC</h1>
-    <p class="section-sub">Net force at the TAC &amp; tension needed for clean release by rotation.</p>
+    <h1>Unseat TAC</h1>
+    <p class="section-sub">Net force at the TAC &amp; tension needed for clean release by rotation &mdash; slip-type TAC with open bore communication (single well fluid throughout).</p>
 
     <div id="tacNotReady" class="card stub">
       <span class="ic">&#8987;</span>
@@ -438,7 +438,7 @@
 
     <div id="tacForm" style="display:none;">
       <div class="card">
-        <p class="card-label">Tubing</p>
+        <p class="card-label">Tubing &amp; Fluid</p>
         <div class="field-row">
           <div class="field">
             <label for="tacTbgSize">Tubing Size</label>
@@ -452,33 +452,27 @@
             </select>
           </div>
         </div>
-      </div>
-
-      <div class="card">
-        <p class="card-label">Fluid @ TBG</p>
-        <div class="field-row">
-          <div class="field">
-            <label for="tacFluidHeight">Column Height (ft)</label>
-            <input type="number" id="tacFluidHeight" step="1" min="0">
-          </div>
-          <div class="field">
-            <label for="tacFluidSg">Sp. Gravity</label>
-            <input type="number" id="tacFluidSg" value="1" step="0.01" min="0">
-          </div>
+        <div class="field">
+          <label for="tacFluidSg">Fluid Sp. Gravity</label>
+          <input type="number" id="tacFluidSg" value="1" step="0.01" min="0">
         </div>
+        <p class="note">One fluid gravity for the whole well: since this TAC has open bore communication, the tubing-internal fluid and the annulus fluid are hydraulically connected and treated as the same fluid.</p>
       </div>
 
       <div class="card">
-        <p class="card-label">NLAP @ CSG <span style="text-transform:none;font-weight:400;">(No Load Above Packer)</span></p>
-        <div class="field-row">
-          <div class="field">
-            <label for="tacNlapDepth">Depth (ft)</label>
-            <input type="number" id="tacNlapDepth" step="1" min="0">
-          </div>
-          <div class="field">
-            <label for="tacNlapSg">Sp. Gravity</label>
-            <input type="number" id="tacNlapSg" value="1" step="0.01" min="0">
-          </div>
+        <p class="card-label">Internal Fluid Column <span style="text-transform:none;font-weight:400;">(optional override)</span></p>
+        <div class="field">
+          <label for="tacFluidHeight">Column Height (ft) &mdash; leave blank to auto-calculate</label>
+          <input type="number" id="tacFluidHeight" step="1" min="0" placeholder="auto">
+        </div>
+        <p class="note">If left blank, this is derived from the TBG Test Result: <strong>Hold</strong> &rarr; full column down to TAC depth. <strong>Leak</strong> &rarr; column runs from NLAP depth down to TAC depth only. Enter a value here only to override with a fresher field-measured level.</p>
+      </div>
+
+      <div class="card">
+        <p class="card-label">NLAP <span style="text-transform:none;font-weight:400;">(No Load Above Packer &mdash; annulus fluid level)</span></p>
+        <div class="field">
+          <label for="tacNlapDepth">NLAP Depth (ft)</label>
+          <input type="number" id="tacNlapDepth" step="1" min="0">
         </div>
       </div>
 
@@ -831,8 +825,8 @@
   ].concat(REFERENCE_PAGES.map(function(rp){
     return { id: rp.id, icon: rp.icon, label: rp.label, sub: rp.sub };
   })).concat([
-    {id:'calc-unset-pump',icon:'&#128736;', label:'Unset DH Pump',  sub:'Max pull calc'},
-    {id:'calc-unset-tac', icon:'&#128736;', label:'Unset TAC',      sub:'Release tension'},
+    {id:'calc-unset-pump',icon:'&#128736;', label:'Unseat DH Pump', sub:'Max pull calc'},
+    {id:'calc-unset-tac', icon:'&#128736;', label:'Unseat TAC',     sub:'Release tension'},
     {id:'calc-tac-overpull', icon:'&#128736;', label:'TAC Overpull', sub:'Pickup tension'},
     {id:'calc-capacity', icon:'&#128736;', label:'Field Calculators', sub:'Volumes & PIP'}
   ]);
@@ -1141,9 +1135,26 @@
   }
 
   /**
-   * calculateUnseatTAC — same formulas as unseatTAC.js, sourcing
-   * tubing properties from tubingData and rod weights from rodsData
-   * (K-BAR uses a manually-entered weight/ft, same as the sheet).
+   * calculateUnseatTAC — updated 2026 to match the user's revised
+   * unseatTAC.js. Slip-type TAC with open bore communication: the
+   * tubing-internal fluid and annulus fluid are hydraulically connected,
+   * so ONE fluidSpGravity is used throughout (previously this took two
+   * separate specific gravities — one for the tubing fluid, one for the
+   * annulus/NLAP fluid — which didn't match the physical model for an
+   * open-bore slip TAC).
+   *
+   * Two other real changes from the previous version, not just a rename:
+   * 1. Internal fluid column height is now OPTIONAL — if not supplied,
+   *    it's derived from tbgTestResult: 'hold' -> full column down to
+   *    TAC depth; 'leak' -> column runs from NLAP depth down to TAC
+   *    depth only (max(0, tacDepth - nlapDepth)), since a non-sealing
+   *    plug lets the internal level equalize down to the annulus level.
+   * 2. Tubing buoyancy (bTub) is now ALWAYS the wall-area-only term
+   *    (OD^2 - ID^2) — independent of hold/leak. Previously hold/leak
+   *    switched between a full-OD term and a wall-area term, but with an
+   *    open TAC bore, annulus fluid always contacts the tubing ID right
+   *    at the TAC regardless of what the pump/plug is doing far below —
+   *    buoyancy is a purely geometric, open-pipe effect here.
    */
   function calculateUnseatTAC(inputs){
     var tbg = findTubingBySize(inputs.tbgSize);
@@ -1156,7 +1167,6 @@
     var tbgOd = tbg.od_in;
 
     var isHold = String(inputs.tbgTestResult).trim().toLowerCase() === 'hold';
-    var effectiveIdForBTub = isHold ? 0 : tbgId;
 
     var rodLineItems = (inputs.remainingRods || []).map(function(rod){
       var wpf = rod.size === 'K-BAR' ? (rod.weightPerFt || KBAR_DEFAULT_WT) : findRodWeightByExactSize(rod.size);
@@ -1165,10 +1175,21 @@
     });
     var wtRodInAir = rodLineItems.reduce(function(s, it){ return s + it.weight; }, 0);
 
-    var wtFluid = (tbgId * tbgId * inputs.fluidAtTbg.columnHeightFt * inputs.fluidAtTbg.spGravity) / 2.94;
-    var bTub = ((tbgOd * tbgOd - effectiveIdForBTub * effectiveIdForBTub) * inputs.nlapAtCsg.depthFt * inputs.nlapAtCsg.spGravity) / 2.94;
+    // Internal fluid column height: derive from hold/leak unless an
+    // explicit override was supplied.
+    var derivedColumnHeightFt = isHold
+      ? inputs.tacDepthFt
+      : Math.max(0, inputs.tacDepthFt - inputs.nlapDepthFt);
+    var effectiveColumnHeightFt = (inputs.columnHeightFt !== undefined && inputs.columnHeightFt !== null)
+      ? inputs.columnHeightFt : derivedColumnHeightFt;
+
+    var wtFluid = (tbgId * tbgId * effectiveColumnHeightFt * inputs.fluidSpGravity) / 2.94;
+
+    // Wall-area-only, independent of hold/leak (open-bore TAC).
+    var bTub = ((tbgOd * tbgOd - tbgId * tbgId) * inputs.nlapDepthFt * inputs.fluidSpGravity) / 2.94;
+
     var wtRod = wtRodInAir;
-    var bRod = 0.128 * inputs.fluidAtTbg.spGravity * wtRod;
+    var bRod = 0.128 * inputs.fluidSpGravity * wtRod;
     var overPull = inputs.overpullLb;
 
     var netForce = wtFluid + wtRod - bTub - bRod - overPull;
@@ -1181,6 +1202,9 @@
     return {
       remainingRods: rodLineItems,
       wtRodInAir: wtRodInAir,
+      columnHeightFt: effectiveColumnHeightFt,
+      derivedColumnHeightFt: derivedColumnHeightFt,
+      columnHeightWasOverridden: (inputs.columnHeightFt !== undefined && inputs.columnHeightFt !== null),
       forces: { wtFluid: wtFluid, bTub: bTub, wtRod: wtRod, bRod: bRod, overPull: overPull, netForce: netForce, netForceDirection: netForceDirection, tubingMovementIn: tubingMovementIn },
       bonus: { tbgWtBuoyed: tbgWtBuoyed, tbgCapTotal: tbgCapTotal }
     };
@@ -1587,21 +1611,24 @@
         };
       }).filter(function(r){ return r.count > 0; });
 
-      var result = calculateUnseatTAC({
+      // Column height is optional — leave it out of the inputs entirely
+      // (rather than defaulting to 0) when the field is blank, so the
+      // calculator derives it from the TBG Test Result instead.
+      var columnHeightRaw = document.getElementById('tacFluidHeight').value;
+      var inputs = {
         tbgSize: document.getElementById('tacTbgSize').value,
         tbgTestResult: document.getElementById('tacTestResult').value,
-        fluidAtTbg: {
-          columnHeightFt: parseFloat(document.getElementById('tacFluidHeight').value) || 0,
-          spGravity: parseFloat(document.getElementById('tacFluidSg').value) || 0
-        },
-        nlapAtCsg: {
-          depthFt: parseFloat(document.getElementById('tacNlapDepth').value) || 0,
-          spGravity: parseFloat(document.getElementById('tacNlapSg').value) || 0
-        },
+        fluidSpGravity: parseFloat(document.getElementById('tacFluidSg').value) || 0,
+        nlapDepthFt: parseFloat(document.getElementById('tacNlapDepth').value) || 0,
         tacDepthFt: parseFloat(document.getElementById('tacDepth').value) || 0,
         remainingRods: remainingRods,
         overpullLb: parseFloat(document.getElementById('tacOverpull').value) || 0
-      });
+      };
+      if(columnHeightRaw !== ''){
+        inputs.columnHeightFt = parseFloat(columnHeightRaw) || 0;
+      }
+
+      var result = calculateUnseatTAC(inputs);
 
       var f = result.forces;
       var heroWarn = f.netForceDirection.indexOf('Compress') === 0;
@@ -1616,6 +1643,7 @@
         '</div>';
 
       html += '<div class="card"><p class="card-label">Force Breakdown</p>'+
+        '<div class="kv"><span class="k">Internal Fluid Column</span><span class="v">'+fmtNum(result.columnHeightFt)+' ft'+(result.columnHeightWasOverridden ? ' (override)' : ' (auto)')+'</span></div>'+
         '<div class="kv"><span class="k">Wt. Fluid</span><span class="v">'+fmtNum(f.wtFluid)+' lbf</span></div>'+
         '<div class="kv"><span class="k">B. Tub (buoyancy)</span><span class="v">'+fmtNum(f.bTub)+' lbf</span></div>'+
         '<div class="kv"><span class="k">Wt. Rod</span><span class="v">'+fmtNum(f.wtRod)+' lbf</span></div>'+

@@ -711,6 +711,7 @@
       <a href="mailto:gamal.salama86@gmail.com">gamal.salama86@gmail.com</a>
       <a href="https://wa.me/201289630938" target="_blank" rel="noopener">WhatsApp: +20 128 963 0938</a>
     </div>
+    <div id="appVersionLine" style="margin-top:.5rem;font-size:.7rem;color:var(--muted);"></div>
   </footer>
 
 </main>
@@ -733,6 +734,11 @@
      dedicated logic (structured data feeding live calculations) and
      stay hand-built. See HANDOFF.md for why.
      ------------------------------------------------------------- */
+
+  // Bump this on any meaningful update (new calculator, formula fix,
+  // new page, etc.) — shown at the bottom of every page in the footer.
+  var APP_VERSION = '1.1.0';
+
   var REFERENCE_PAGES = [
     { id: 'surface-unit',   label: 'Surface Unit',          icon: '&#9881;',   sub: 'Geometry & types', json: 'surface-unit.json' },
     { id: 'tac',            label: 'Tubing Anchor Catcher', icon: '&#9875;',   sub: 'Anchor catcher',   json: 'tac.json' },
@@ -771,6 +777,10 @@
       mainEl.insertBefore(section, footerEl);
     });
   })();
+
+  // Show the app version in the footer (present on every page).
+  var versionEl = document.getElementById('appVersionLine');
+  if(versionEl) versionEl.textContent = 'RodBook v' + APP_VERSION;
 
   /* ---------- Navigation ---------- */
   var menuBtn = document.getElementById('menuBtn');
@@ -1071,29 +1081,27 @@
       return sizeEntry ? sizeEntry.max_pull_lbf : null;
     });
 
-    // Max allowable OVERPULL governed by taper i = that taper's own rated
-    // tension minus the buoyed weight already hanging below its top
-    // connection (that weight already consumes part of the rating before
-    // any overpull is applied at all — whatever's left over is the safe
-    // overpull margin for that taper).
-    //
-    // "Below taper i" = taper i itself + every taper below it (tapers are
-    // ordered top to bottom) + ALL K-Bar weight, since K-Bars always sit
-    // at the very bottom of the string, below every rod taper.
-    //
-    // Buoyancy factor (BF = 1 - 0.128*SG) is the standard steel-in-fluid
-    // approximation already used elsewhere in this calculator
-    // (buoyancyEffect below) — applied uniformly here since this
-    // calculator doesn't track fluid level vs. depth per taper.
+    // Rod weight is always WET (buoyed), never dry — buoyancy factor
+    // defaults to 1 (no reduction) when no fluid gravity is supplied,
+    // which is the same as SG=0 (no fluid).
+    var buoyancyFactor = 1 - 0.128 * (spGravity || 0);
     var totalKbarWeight = kbarWeights.reduce(function(a,b){return a+b;}, 0);
-    var buoyancyFactor = (spGravity !== undefined && spGravity !== null && spGravity !== '')
-      ? (1 - 0.128 * spGravity) : 1;
 
-    var currentAllowTensions = tapers.map(function(t, i){
+    // Own Tension[i] = that taper's own rating minus the WET weight of
+    // everything at or below it (the taper itself + every taper below +
+    // all K-Bars, since K-Bars always sit at the very bottom).
+    var ownTensions = tapers.map(function(t, i){
       if(gradeTensions[i] === null) return null;
-      var weightBelowDry = rodWeights.slice(i).reduce(function(a,b){return a+b;}, 0) + totalKbarWeight;
-      var buoyedWeightBelow = weightBelowDry * buoyancyFactor;
-      return gradeTensions[i] - buoyedWeightBelow;
+      var dryWeightBelow = rodWeights.slice(i).reduce(function(a,b){return a+b;}, 0) + totalKbarWeight;
+      return gradeTensions[i] - (dryWeightBelow * buoyancyFactor);
+    });
+
+    // Max Allowable Tension at the rig, per taper = that taper's Own
+    // Tension plus the WET weight of every taper strictly above it.
+    var currentAllowTensions = tapers.map(function(t, i){
+      if(ownTensions[i] === null) return null;
+      var dryWeightAbove = rodWeights.slice(0, i).reduce(function(a,b){return a+b;}, 0);
+      return ownTensions[i] + (dryWeightAbove * buoyancyFactor);
     });
 
     var validTensions = currentAllowTensions.filter(function(v){ return v !== null; });
@@ -1118,6 +1126,7 @@
           size: t.size, gradeId: t.gradeId, count: t.count,
           weight: rodWeights[i],
           gradeAllowTension: gradeTensions[i],
+          ownTension: ownTensions[i],
           currentAllowTension: currentAllowTensions[i]
         };
       }),
@@ -1553,11 +1562,13 @@
         '</div>';
 
       html += '<div class="card"><p class="card-label">Per-Taper Breakdown</p><div class="table-wrap"><table>'+
-        '<thead><tr><th>Size</th><th>Grade</th><th>Wt (lb)</th><th>Own Tension</th><th>Allow. Tension</th></tr></thead><tbody>'+
+        '<thead><tr><th>Size</th><th>Grade</th><th>Wt (lb)</th><th>Rating</th><th>Own Tension</th><th>Allow. Tension</th></tr></thead><tbody>'+
         result.tapers.map(function(t){
-          return '<tr><td>'+t.size+'&Prime;</td><td>'+t.gradeId+'</td><td>'+fmtNum(t.weight)+'</td><td>'+fmtNum(t.gradeAllowTension)+'</td><td>'+fmtNum(t.currentAllowTension)+'</td></tr>';
+          return '<tr><td>'+t.size+'&Prime;</td><td>'+t.gradeId+'</td><td>'+fmtNum(t.weight)+'</td><td>'+fmtNum(t.gradeAllowTension)+'</td><td>'+fmtNum(t.ownTension)+'</td><td>'+fmtNum(t.currentAllowTension)+'</td></tr>';
         }).join('')+
-        '</tbody></table></div></div>';
+        '</tbody></table></div>'+
+        '<p class="note">Rating = grade\u2019s max pull. Own Tension = Rating &minus; wet weight at/below this taper (incl. K-Bars). Allow. Tension = Own Tension + wet weight above this taper. Headline = min Allow. Tension across all tapers.</p>'+
+        '</div>';
 
       if(result.kbars.length){
         html += '<div class="card"><p class="card-label">K-Bar Breakdown</p><div class="table-wrap"><table>'+

@@ -25,9 +25,9 @@
           "heading": "Setback Reference (Inches)",
           "columns": ["Unit / Model", "Foundation Type", "Setback Value"],
           "rows": [
-            ["Lufkin C-456", "Unit Base", "114.88"],
-            ["Lufkin C-456", "Concrete Slab", "94.25"],
-            ["Lufkin C-456", "Limestone Pan", "84"]
+            ["LC-456", "Unit Base", "114.88"],
+            ["LC-456", "Concrete Slab", "94.25"],
+            ["LC-456", "Limestone Pan", "84"]
           ]
         },
         {
@@ -42,10 +42,15 @@
         },
         {
           "type": "table",
-          "heading": "Component Assemblies Weights in Normal Lifts (Lbs)",
-          "columns": ["Head", "Beam / Equal Assy.", "Post", "G/B W/Cranks Unitbase*", "Engine Base**", "Ladder"],
+          "heading": "Detailed Component Weights (Lbs)",
+          "columns": ["Component Description", "Weight"],
           "rows": [
-            ["1135", "5102", "1935", "19175", "1045", "86"]
+            ["G/B W/Cranks Unitbase*", "19,175"],
+            ["Head", "1,135"],
+            ["Beam / Equal Assy.", "5,102"],
+            ["Post", "1,935"],
+            ["Engine Base**", "1,045"],
+            ["Ladder", "86"]
           ]
         },
         {
@@ -76,9 +81,9 @@
           "heading": "Setback Reference (Inches)",
           "columns": ["Unit / Model", "Foundation Type", "Setback Value"],
           "rows": [
-            ["Lufkin C-640", "Unit Base", "136.88"],
-            ["Lufkin C-640", "Concrete Slab", "114"],
-            ["Lufkin C-640", "Limestone Pan", "108"]
+            ["LC-640", "Unit Base", "136.88"],
+            ["LC-640", "Concrete Slab", "114"],
+            ["LC-640", "Limestone Pan", "108"]
           ]
         },
         {
@@ -93,10 +98,15 @@
         },
         {
           "type": "table",
-          "heading": "Component Assemblies Weights in Normal Lifts (Lbs)",
-          "columns": ["Head", "Beam / Equal Assy.", "Post", "G/B W/Cranks Unitbase*", "Engine Base**", "Ladder"],
+          "heading": "Detailed Component Weights (Lbs)",
+          "columns": ["Component Description", "Weight"],
           "rows": [
-            ["1795", "7502", "2665", "22060", "1115", "86"]
+            ["G/B W/Cranks Unitbase*", "22,060"],
+            ["Head", "1,795"],
+            ["Beam / Equal Assy.", "7,502"],
+            ["Post", "2,665"],
+            ["Engine Base**", "1,115"],
+            ["Ladder", "86"]
           ]
         },
         {
@@ -127,9 +137,9 @@
           "heading": "Setback Reference (Inches)",
           "columns": ["Unit / Model", "Foundation Type", "Setback Value"],
           "rows": [
-            ["Lufkin C-912", "Unit Base", "166.5"],
-            ["Lufkin C-912", "Concrete Slab", "146"],
-            ["Lufkin C-912", "Limestone Pan", "135"],
+            ["LC-912", "Unit Base", "166.5"],
+            ["LC-912", "Concrete Slab", "146"],
+            ["LC-912", "Limestone Pan", "135"],
             ["SLB C-912", "Unit Base", "162.4"],
             ["SLB C-912", "Concrete Slab", "152.25"],
             ["SLB C-912", "Limestone Pan", "120 (old 110.5) For rig"]
@@ -147,10 +157,15 @@
         },
         {
           "type": "table",
-          "heading": "Component Assemblies Weights in Normal Lifts (Lbs)",
-          "columns": ["Head", "Beam / Equal Assy.", "Post", "G/B W/Cranks Unitbase*", "Engine Base**", "Ladder"],
+          "heading": "Detailed Component Weights (Lbs)",
+          "columns": ["Component Description", "Weight"],
           "rows": [
-            ["2100", "9489", "2665", "25890", "1115", "86"]
+            ["G/B W/Cranks Unitbase*", "25,890"],
+            ["Head", "2,100"],
+            ["Beam / Equal Assy.", "9,489"],
+            ["Post", "2,665"],
+            ["Engine Base**", "1,115"],
+            ["Ladder", "86"]
           ]
         },
         {
@@ -181,14 +196,14 @@
           "heading": "Setback Reference (Inches)",
           "columns": ["Unit / Model", "Foundation Type", "Setback Value"],
           "rows": [
-            ["Lufkin C-1280", "Unit Base", "143"],
-            ["Lufkin C-1280", "Concrete Slab", "130"],
-            ["Lufkin C-1280", "Limestone Pan", "120"],
-            ["Lufkin LLS C-1280", "Unit Base", "139.17"],
-            ["Lufkin LLS C-1280 (Case 1)", "Concrete Slab", "122"],
-            ["Lufkin LLS C-1280 (Case 1)", "Limestone Pan", "110"],
-            ["Lufkin LLS C-1280 (Case 2)", "Concrete Slab", "125 (check)"],
-            ["Lufkin LLS C-1280 (Case 2)", "Limestone Pan", "115"]
+            ["LC-1280", "Unit Base", "143"],
+            ["LC-1280", "Concrete Slab", "130"],
+            ["LC-1280", "Limestone Pan", "120"],
+            ["LLS C-1280", "Unit Base", "139.17"],
+            ["LLS C-1280 (Case 1)", "Concrete Slab", "122"],
+            ["LLS C-1280 (Case 1)", "Limestone Pan", "110"],
+            ["LLS C-1280 (Case 2)", "Concrete Slab", "125 (check)"],
+            ["LLS C-1280 (Case 2)", "Limestone Pan", "115"]
           ]
         },
         {

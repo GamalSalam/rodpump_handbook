@@ -146,13 +146,17 @@
           ]
         },
         {
-          "type": "list",
+          "type": "table",
           "heading": "Stroke Lengths (S.L)",
-          "items": [
-            "168\"",
-            "144\"",
-            "124\"",
-            "102\""
+          "columns": ["Unit / Model", "Stroke Length"],
+          "rows": [
+            ["SLS-912", "170\""],
+            ["SLS-912", "141\""],
+            ["SLS-912", "113\""],
+            ["LC-912", "168\""],
+            ["LC-912", "144\""],
+            ["LC-912", "124\""],
+            ["LC-912", "102\""]
           ]
         },
         {
@@ -199,21 +203,26 @@
             ["LC-1280", "Unit Base", "143"],
             ["LC-1280", "Concrete Slab", "130"],
             ["LC-1280", "Limestone Pan", "120"],
-            ["LLS C-1280", "Unit Base", "139.17"],
-            ["LLS C-1280 (Case 1)", "Concrete Slab", "122"],
-            ["LLS C-1280 (Case 1)", "Limestone Pan", "110"],
-            ["LLS C-1280 (Case 2)", "Concrete Slab", "125 (check)"],
-            ["LLS C-1280 (Case 2)", "Limestone Pan", "115"]
+            ["LLLS C-1280", "Unit Base", "139.17"],
+            ["LLLS C-1280 (Case 1)", "Concrete Slab", "122"],
+            ["LLLS C-1280 (Case 1)", "Limestone Pan", "110"],
+            ["LLLS C-1280 (Case 2)", "Concrete Slab", "125 (check)"],
+            ["LLLS C-1280 (Case 2)", "Limestone Pan", "115"]
           ]
         },
         {
-          "type": "list",
+          "type": "table",
           "heading": "Stroke Lengths (S.L)",
-          "items": [
-            "192\"",
-            "160\"",
-            "128\"",
-            "97\""
+          "columns": ["Unit / Model", "Stroke Length"],
+          "rows": [
+            ["LC-1280", "192\""],
+            ["LC-1280", "168\""],
+            ["LC-1280", "144\""],
+            ["LC-1280", "126\""],
+            ["LLS-1280", "192\""],
+            ["LLS-1280", "160\""],
+            ["LLS-1280", "128\""],
+            ["LLS-1280", "97\""]
           ]
         },
         {

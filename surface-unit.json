@@ -1,7 +1,7 @@
 {
   "_meta": {
     "note": "Example only — replace with your own surface unit content. Shows the 'tabs' feature: each tab has its own independent 'sections' array using the same block types as any other page (text, kv, table, list).",
-    "last_updated": "2026-08-26"
+    "last_updated": "2026-11-13"
   },
 
   "intro": "Surface pumping unit geometry types, setback data, structural dimensions, component lift weights, and counterweight options.",
@@ -23,11 +23,11 @@
         {
           "type": "table",
           "heading": "Setback Reference (Inches)",
-          "columns": ["Foundation Type", "Setback Value"],
+          "columns": ["Unit / Model", "Foundation Type", "Setback Value"],
           "rows": [
-            ["Unit Base", "114.88"],
-            ["Concrete Slab", "94.25"],
-            ["Limestone Pane", "84"]
+            ["Lufkin C-456", "Unit Base", "114.88"],
+            ["Lufkin C-456", "Concrete Slab", "94.25"],
+            ["Lufkin C-456", "Limestone Pan", "84"]
           ]
         },
         {
@@ -42,15 +42,10 @@
         },
         {
           "type": "table",
-          "heading": "Detailed Component Weights (Lbs)",
-          "columns": ["Component Description", "Weight"],
+          "heading": "Component Assemblies Weights in Normal Lifts (Lbs)",
+          "columns": ["Head", "Beam / Equal Assy.", "Post", "G/B W/Cranks Unitbase*", "Engine Base**", "Ladder"],
           "rows": [
-            ["Head", "1,135"],
-            ["Beam / Equal Assy.", "5,102"],
-            ["Post", "1,935"],
-            ["G/B W/Cranks Unitbase*", "19,175"],
-            ["Engine Base**", "1,045"],
-            ["Ladder", "86"]
+            ["1135", "5102", "1935", "19175", "1045", "86"]
           ]
         },
         {
@@ -79,11 +74,11 @@
         {
           "type": "table",
           "heading": "Setback Reference (Inches)",
-          "columns": ["Foundation Type", "Setback Value"],
+          "columns": ["Unit / Model", "Foundation Type", "Setback Value"],
           "rows": [
-            ["Unit Base", "136.88"],
-            ["Concrete Slab", "117"],
-            ["Limestone Pane", "108"]
+            ["Lufkin C-640", "Unit Base", "136.88"],
+            ["Lufkin C-640", "Concrete Slab", "114"],
+            ["Lufkin C-640", "Limestone Pan", "108"]
           ]
         },
         {
@@ -98,15 +93,10 @@
         },
         {
           "type": "table",
-          "heading": "Detailed Component Weights (Lbs)",
-          "columns": ["Component Description", "Weight"],
+          "heading": "Component Assemblies Weights in Normal Lifts (Lbs)",
+          "columns": ["Head", "Beam / Equal Assy.", "Post", "G/B W/Cranks Unitbase*", "Engine Base**", "Ladder"],
           "rows": [
-            ["Head", "1,795"],
-            ["Beam / Equal Assy.", "7,502"],
-            ["Post", "2,665"],
-            ["G/B W/Cranks Unitbase*", "22,060"],
-            ["Engine Base**", "1,115"],
-            ["Ladder", "86"]
+            ["1795", "7502", "2665", "22060", "1115", "86"]
           ]
         },
         {
@@ -135,11 +125,14 @@
         {
           "type": "table",
           "heading": "Setback Reference (Inches)",
-          "columns": ["Foundation Type", "Setback Value"],
+          "columns": ["Unit / Model", "Foundation Type", "Setback Value"],
           "rows": [
-            ["Unit Base", "166.5"],
-            ["Concrete Slab", "146"],
-            ["Limestone Pane", "135"]
+            ["Lufkin C-912", "Unit Base", "166.5"],
+            ["Lufkin C-912", "Concrete Slab", "146"],
+            ["Lufkin C-912", "Limestone Pan", "135"],
+            ["SLB C-912", "Unit Base", "162.4"],
+            ["SLB C-912", "Concrete Slab", "152.25"],
+            ["SLB C-912", "Limestone Pan", "120 (old 110.5) For rig"]
           ]
         },
         {
@@ -154,15 +147,10 @@
         },
         {
           "type": "table",
-          "heading": "Detailed Component Weights (Lbs)",
-          "columns": ["Component Description", "Weight"],
+          "heading": "Component Assemblies Weights in Normal Lifts (Lbs)",
+          "columns": ["Head", "Beam / Equal Assy.", "Post", "G/B W/Cranks Unitbase*", "Engine Base**", "Ladder"],
           "rows": [
-            ["Head", "2,100"],
-            ["Beam / Equal Assy.", "9,489"],
-            ["Post", "2,665"],
-            ["G/B W/Cranks Unitbase*", "25,890"],
-            ["Engine Base**", "1,115"],
-            ["Ladder", "86"]
+            ["2100", "9489", "2665", "25890", "1115", "86"]
           ]
         },
         {
@@ -191,11 +179,16 @@
         {
           "type": "table",
           "heading": "Setback Reference (Inches)",
-          "columns": ["Foundation Type", "Setback Value"],
+          "columns": ["Unit / Model", "Foundation Type", "Setback Value"],
           "rows": [
-            ["Unit Base", "139.17"],
-            ["Concrete Slab", "122"],
-            ["Limestone Pane", "110"]
+            ["Lufkin C-1280", "Unit Base", "143"],
+            ["Lufkin C-1280", "Concrete Slab", "130"],
+            ["Lufkin C-1280", "Limestone Pan", "120"],
+            ["Lufkin LLS C-1280", "Unit Base", "139.17"],
+            ["Lufkin LLS C-1280 (Case 1)", "Concrete Slab", "122"],
+            ["Lufkin LLS C-1280 (Case 1)", "Limestone Pan", "110"],
+            ["Lufkin LLS C-1280 (Case 2)", "Concrete Slab", "125 (check)"],
+            ["Lufkin LLS C-1280 (Case 2)", "Limestone Pan", "115"]
           ]
         },
         {
@@ -233,7 +226,7 @@
         {
           "type": "table",
           "heading": "Lufkin Counter Weight Reference Table",
-          "columns": ["Weight Type", "Weight (WT, lb)", "Length (leng, in)"],
+          "columns": ["Weight Type (Wt_Type)", "Weight (WT, lb)", "Length (leng, in)"],
           "rows": [
             ["1RO", "2075", "52\""],
             ["2RO", "1708", "48\""],

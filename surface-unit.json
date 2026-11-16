@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "note": "Example only — replace with your own surface unit content. Shows the 'tabs' feature: each tab has its own independent 'sections' array using the same block types as any other page (text, kv, table, list).",
-    "last_updated": "2026-11-13"
+    "note": "Surface pumping unit specifications including Lufkin (LC / LLC) and Schlumberger Shores (SLS) models.",
+    "last_updated": "2026-11-16"
   },
 
   "intro": "Surface pumping unit geometry types, setback data, structural dimensions, component lift weights, and counterweight options.",
@@ -124,7 +124,7 @@
       "sections": [
         {
           "type": "kv",
-          "heading": "Lufkin Catalog Structural Specifications",
+          "heading": "Lufkin (LC-912) Catalog Structural Specifications",
           "items": [
             { "k": "Crank Type", "v": "94110B" },
             { "k": "L (Bottom of stroke to unit base)", "v": "62.25\"" },
@@ -134,34 +134,27 @@
         },
         {
           "type": "table",
-          "heading": "Setback Reference (Inches)",
-          "columns": ["Unit / Model", "Foundation Type", "Setback Value"],
+          "heading": "LC-912 (Lufkin) — Setback Reference (Inches)",
+          "columns": ["Foundation Type", "Setback Value"],
           "rows": [
-            ["LC-912", "Unit Base", "166.5"],
-            ["LC-912", "Concrete Slab", "146"],
-            ["LC-912", "Limestone Pan", "135"],
-            ["SLB C-912", "Unit Base", "162.4"],
-            ["SLB C-912", "Concrete Slab", "152.25"],
-            ["SLB C-912", "Limestone Pan", "120 (old 110.5) For rig"]
+            ["Unit Base", "166.5"],
+            ["Concrete Slab", "146"],
+            ["Limestone Pan", "135"]
+          ]
+        },
+        {
+          "type": "list",
+          "heading": "LC-912 (Lufkin) — Stroke Lengths (S.L)",
+          "items": [
+            "168\"",
+            "144\"",
+            "124\"",
+            "102\""
           ]
         },
         {
           "type": "table",
-          "heading": "Stroke Lengths (S.L)",
-          "columns": ["Unit / Model", "Stroke Length"],
-          "rows": [
-            ["SLS-912", "170\""],
-            ["SLS-912", "141\""],
-            ["SLS-912", "113\""],
-            ["LC-912", "168\""],
-            ["LC-912", "144\""],
-            ["LC-912", "124\""],
-            ["LC-912", "102\""]
-          ]
-        },
-        {
-          "type": "table",
-          "heading": "Detailed Component Weights (Lbs)",
+          "heading": "LC-912 (Lufkin) — Detailed Component Weights (Lbs)",
           "columns": ["Component Description", "Weight"],
           "rows": [
             ["G/B W/Cranks Unitbase*", "25,890"],
@@ -178,6 +171,30 @@
           "items": [
             "* HIGH PRIME MOTOR BASE",
             "** GAS ENGINE BASE"
+          ]
+        },
+        {
+          "type": "text",
+          "heading": "SLS-912 — Schlumberger (Shores) Unit Specifications",
+          "body": "Note: The SLS-912 is a Schlumberger pumping unit manufactured by Shores, not a Lufkin catalog unit. Use the setback dimensions and stroke lengths below when setting up or rigging an SLS-912."
+        },
+        {
+          "type": "table",
+          "heading": "SLS-912 (Schlumberger / Shores) — Setback Reference (Inches)",
+          "columns": ["Foundation Type", "Setback Value"],
+          "rows": [
+            ["Unit Base", "162.4"],
+            ["Concrete Slab", "152.25"],
+            ["Limestone Pan", "120 (old 110.5) For rig"]
+          ]
+        },
+        {
+          "type": "list",
+          "heading": "SLS-912 (Schlumberger / Shores) — Stroke Lengths (S.L)",
+          "items": [
+            "170\"",
+            "141\"",
+            "113\""
           ]
         }
       ]
@@ -197,32 +214,44 @@
         },
         {
           "type": "table",
-          "heading": "Setback Reference (Inches)",
-          "columns": ["Unit / Model", "Foundation Type", "Setback Value"],
+          "heading": "LC-1280 — Setback Reference (Inches)",
+          "columns": ["Foundation Type", "Setback Value"],
           "rows": [
-            ["LC-1280", "Unit Base", "143"],
-            ["LC-1280", "Concrete Slab", "130"],
-            ["LC-1280", "Limestone Pan", "120"],
-            ["LLLS C-1280", "Unit Base", "139.17"],
-            ["LLLS C-1280 (Case 1)", "Concrete Slab", "122"],
-            ["LLLS C-1280 (Case 1)", "Limestone Pan", "110"],
-            ["LLLS C-1280 (Case 2)", "Concrete Slab", "125 (check)"],
-            ["LLLS C-1280 (Case 2)", "Limestone Pan", "115"]
+            ["Unit Base", "143"],
+            ["Concrete Slab", "130"],
+            ["Limestone Pan", "120"]
+          ]
+        },
+        {
+          "type": "list",
+          "heading": "LC-1280 — Stroke Lengths (S.L)",
+          "items": [
+            "192\"",
+            "168\"",
+            "144\"",
+            "126\""
           ]
         },
         {
           "type": "table",
-          "heading": "Stroke Lengths (S.L)",
-          "columns": ["Unit / Model", "Stroke Length"],
+          "heading": "LLC-1280 — Setback Reference (Inches)",
+          "columns": ["Model / Case", "Foundation Type", "Setback Value"],
           "rows": [
-            ["LC-1280", "192\""],
-            ["LC-1280", "168\""],
-            ["LC-1280", "144\""],
-            ["LC-1280", "126\""],
-            ["LLS-1280", "192\""],
-            ["LLS-1280", "160\""],
-            ["LLS-1280", "128\""],
-            ["LLS-1280", "97\""]
+            ["LLC-1280", "Unit Base", "139.17"],
+            ["LLC-1280 (Case 1)", "Concrete Slab", "122"],
+            ["LLC-1280 (Case 1)", "Limestone Pan", "110"],
+            ["LLC-1280 (Case 2)", "Concrete Slab", "125 (check)"],
+            ["LLC-1280 (Case 2)", "Limestone Pan", "115"]
+          ]
+        },
+        {
+          "type": "list",
+          "heading": "LLC-1280 — Stroke Lengths (S.L)",
+          "items": [
+            "192\"",
+            "160\"",
+            "128\"",
+            "97\""
           ]
         },
         {

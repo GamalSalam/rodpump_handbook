@@ -1,10 +1,20 @@
 {
   "_meta": {
-    "note": "Surface pumping unit specifications including Lufkin (LC), LLS (C1280D-427-192), and Schlumberger (SLS) models.",
+    "note": "Fast field handbook reference for Lufkin (LC), LLS, and Schlumberger (SLS) surface pumping units.",
     "last_updated": "2026-11-19"
   },
 
-  "intro": "Surface pumping unit geometry types, setback data, structural dimensions, component lift weights, bearing designations, and counterweight options.",
+  "intro": "Surface pumping unit geometry, foundation setbacks, component lift weights, bearing designations, and counterweights.",
+
+  "sections": [
+    {
+      "type": "image",
+      "heading": "Unit Geometry Reference",
+      "src": "images/unit-geometry.png",
+      "alt": "Conventional pumping unit geometry dimensions (A, B, C, L, R)",
+      "caption": "Conventional geometry reference: A (center to equalizer), B (center to wellhead), C (center bearing height), L (bottom of stroke clearance), R (setback)."
+    }
+  ],
 
   "tabs": [
     {
@@ -12,12 +22,10 @@
       "sections": [
         {
           "type": "kv",
-          "heading": "Lufkin (LC-456 / C-456D-256-120) Catalog Structural & Bearing Specifications",
+          "heading": "Lufkin (LC-456 / C-456D-256-120) — Structural & Bearing Specs",
           "items": [
             { "k": "Crank Type", "v": "8495B / 8495CA" },
-            { "k": "Crank Pin Bearing (C-456D-256-120)", "v": "2SE" },
-            { "k": "Equalizer Bearing (C-456D-256-120)", "v": "1RA" },
-            { "k": "Center Bearing (C-456D-256-120)", "v": "2TGC" },
+            { "k": "Crank Pin / Equalizer / Center Bearings", "v": "2SE / 1RA / 2TGC" },
             { "k": "L (Bottom of stroke to unit base)", "v": "76\"" },
             { "k": "A (Center bearing shaft to equalizer shaft)", "v": "111\"" },
             { "k": "Reducer Oil Capacity", "v": "55 Gallons" }
@@ -25,28 +33,28 @@
         },
         {
           "type": "table",
-          "heading": "Setback Reference (Inches)",
-          "columns": ["Unit / Model", "Foundation Type", "Setback Value"],
+          "heading": "LC-456 — Setback Reference (Inches)",
+          "columns": ["Foundation Type", "Setback (in)"],
           "rows": [
-            ["LC-456", "Unit Base", "114.88"],
-            ["LC-456", "Concrete Slab", "94.25"],
-            ["LC-456", "Limestone Pan", "84"]
+            ["Unit Base", "114.88"],
+            ["Concrete Slab", "94.25"],
+            ["Limestone Pan", "84"]
           ]
         },
         {
           "type": "list",
-          "heading": "Stroke Lengths (S.L)",
+          "heading": "LC-456 — Stroke Lengths (S.L)",
           "items": [
             "120\"",
             "102\"",
-            "84\" (Catalog: 85\")",
+            "85\" (Field: 84\")",
             "66\""
           ]
         },
         {
           "type": "table",
-          "heading": "Detailed Component Weights (Lbs)",
-          "columns": ["Component Description", "Weight"],
+          "heading": "LC-456 — Component Lift Weights (Lbs)",
+          "columns": ["Component Description", "Weight (lb)"],
           "rows": [
             ["G/B W/Cranks Unitbase*", "19,175"],
             ["Head", "1,135"],
@@ -54,15 +62,8 @@
             ["Post", "1,935"],
             ["Engine Base**", "1,045"],
             ["Ladder", "86"]
-          ]
-        },
-        {
-          "type": "list",
-          "heading": "Weight Notes",
-          "items": [
-            "* HIGH PRIME MOTOR BASE",
-            "** GAS ENGINE BASE"
-          ]
+          ],
+          "note": "* High Prime Motor Base | ** Gas Engine Base"
         }
       ]
     },
@@ -71,12 +72,10 @@
       "sections": [
         {
           "type": "kv",
-          "heading": "Lufkin (LC-640 / C-640D-305-144) Catalog Structural & Bearing Specifications",
+          "heading": "Lufkin (LC-640 / C-640D-305-144) — Structural & Bearing Specs",
           "items": [
             { "k": "Crank Type", "v": "94110B / 94110CA" },
-            { "k": "Crank Pin Bearing (C-640D-305-144)", "v": "1SE" },
-            { "k": "Equalizer Bearing (C-640D-305-144)", "v": "ORA" },
-            { "k": "Center Bearing (C-640D-305-144)", "v": "1TGC" },
+            { "k": "Crank Pin / Equalizer / Center Bearings", "v": "1SE / ORA / 1TGC" },
             { "k": "L (Bottom of stroke to unit base)", "v": "72.5\"" },
             { "k": "A (Center bearing shaft to equalizer shaft)", "v": "120\"" },
             { "k": "Reducer Oil Capacity", "v": "70 Gallons" }
@@ -84,28 +83,28 @@
         },
         {
           "type": "table",
-          "heading": "Setback Reference (Inches)",
-          "columns": ["Unit / Model", "Foundation Type", "Setback Value"],
+          "heading": "LC-640 — Setback Reference (Inches)",
+          "columns": ["Foundation Type", "Setback (in)"],
           "rows": [
-            ["LC-640", "Unit Base", "136.88"],
-            ["LC-640", "Concrete Slab", "114"],
-            ["LC-640", "Limestone Pan", "108"]
+            ["Unit Base", "136.88"],
+            ["Concrete Slab", "114"],
+            ["Limestone Pan", "108"]
           ]
         },
         {
           "type": "list",
-          "heading": "Stroke Lengths (S.L)",
+          "heading": "LC-640 — Stroke Lengths (S.L)",
           "items": [
             "144\"",
-            "126\" (Catalog: 124\")",
+            "124\" (Field: 126\")",
             "106\"",
             "88\""
           ]
         },
         {
           "type": "table",
-          "heading": "Detailed Component Weights (Lbs)",
-          "columns": ["Component Description", "Weight"],
+          "heading": "LC-640 — Component Lift Weights (Lbs)",
+          "columns": ["Component Description", "Weight (lb)"],
           "rows": [
             ["G/B W/Cranks Unitbase*", "22,060"],
             ["Head", "1,795"],
@@ -113,15 +112,8 @@
             ["Post", "2,665"],
             ["Engine Base**", "1,115"],
             ["Ladder", "86"]
-          ]
-        },
-        {
-          "type": "list",
-          "heading": "Weight Notes",
-          "items": [
-            "* HIGH PRIME MOTOR BASE",
-            "** GAS ENGINE BASE"
-          ]
+          ],
+          "note": "* High Prime Motor Base | ** Gas Engine Base"
         }
       ]
     },
@@ -130,12 +122,10 @@
       "sections": [
         {
           "type": "kv",
-          "heading": "Lufkin (LC-912 / C-912D-365-168) Catalog Structural & Bearing Specifications",
+          "heading": "1. Lufkin (LC-912 / C-912D-365-168) — Structural & Bearing Specs",
           "items": [
             { "k": "Crank Type", "v": "94110B / 94110CA" },
-            { "k": "Crank Pin Bearing (C-912D-365-168)", "v": "1SE" },
-            { "k": "Equalizer Bearing (C-912D-365-168)", "v": "ORA" },
-            { "k": "Center Bearing (C-912D-365-168)", "v": "0TGB" },
+            { "k": "Crank Pin / Equalizer / Center Bearings", "v": "1SE / ORA / 0TGB" },
             { "k": "L (Bottom of stroke to unit base)", "v": "62.25\"" },
             { "k": "A (Center bearing shaft to equalizer shaft)", "v": "120\"" },
             { "k": "Reducer Oil Capacity", "v": "107 Gallons" }
@@ -144,7 +134,7 @@
         {
           "type": "table",
           "heading": "LC-912 (Lufkin) — Setback Reference (Inches)",
-          "columns": ["Foundation Type", "Setback Value"],
+          "columns": ["Foundation Type", "Setback (in)"],
           "rows": [
             ["Unit Base", "166.5"],
             ["Concrete Slab", "146"],
@@ -156,15 +146,15 @@
           "heading": "LC-912 (Lufkin) — Stroke Lengths (S.L)",
           "items": [
             "168\"",
-            "144\" (Catalog: 145\")",
+            "145\" (Field: 144\")",
             "124\"",
             "102\""
           ]
         },
         {
           "type": "table",
-          "heading": "LC-912 (Lufkin) — Detailed Component Weights (Lbs)",
-          "columns": ["Component Description", "Weight"],
+          "heading": "LC-912 (Lufkin) — Component Lift Weights (Lbs)",
+          "columns": ["Component Description", "Weight (lb)"],
           "rows": [
             ["G/B W/Cranks Unitbase*", "25,890"],
             ["Head", "2,100"],
@@ -172,61 +162,43 @@
             ["Post", "2,665"],
             ["Engine Base**", "1,115"],
             ["Ladder", "86"]
-          ]
-        },
-        {
-          "type": "list",
-          "heading": "Weight Notes",
-          "items": [
-            "* HIGH PRIME MOTOR BASE",
-            "** GAS ENGINE BASE"
-          ]
-        },
-        {
-          "type": "text",
-          "heading": "SLS-912 (C912D-365-168) — Schlumberger Conventional Unit Specifications",
-          "body": "Note: The SLS-912 (Catalog Model C912D-365-168) is a Schlumberger conventional pumping unit, not a Lufkin catalog unit. Use the structural specs, setback dimensions, and stroke lengths below when setting up or rigging an SLS-912."
+          ],
+          "note": "* High Prime Motor Base | ** Gas Engine Base"
         },
         {
           "type": "kv",
-          "heading": "SLS-912 (C912D-365-168) — Schlumberger Catalog Structural, Bearing & Counterbalance Specs",
+          "heading": "2. SLS-912 (C912D-365-168) — Schlumberger Structural & Bearing Specs",
           "items": [
-            { "k": "Catalog Model", "v": "C912D-365-168" },
-            { "k": "Polished Rod Capacity", "v": "36,500 lbf" },
-            { "k": "Rated Torque / Gear Ratio", "v": "912,000 lbf.in / 28.79 (12 rpm)" },
             { "k": "Crank Type & Weight", "v": "GRC120 (4,699 × 2 lbm)" },
             { "k": "Crank Pin / Equalizer / Center Bearings", "v": "WAS110 / EAS110 / SAS110" },
-            { "k": "Crank Pin Bore Positions (R1, R2, R3)", "v": "47.09\", 39.49\", 31.89\"" },
             { "k": "Structural Unbalance", "v": "-1,400 lbf" },
-            { "k": "Effective Counterbalance (ECB)", "v": "4,944 lbf (Cranks Only) / 33,977 lbf (Max w/ 4×WMA30 + 4×WAX05)" },
-            { "k": "Torque Factor @ 90° (S1 / S2 / S3)", "v": "80.24\" / 67.86\" / 55.14\"" },
             { "k": "A (Center bearing shaft to equalizer shaft)", "v": "120.00\"" },
             { "k": "B (Center bearing shaft to wellhead)", "v": "210.04\"" },
             { "k": "C (Center bearing height)", "v": "261.97\"" },
             { "k": "L (Bottom of stroke to unit base)", "v": "52.76\"" },
             { "k": "R (Unit base front to wellhead / Setback)", "v": "162.40\"" },
-            { "k": "Wireline Hanger & Rope", "v": "1-3/8\" × 16\" centers | 34, 6×25F EIPS (460\" length)" },
             { "k": "Sheave Diameter & Groove", "v": "50\" / 8C" },
             { "k": "Reducer Oil Capacity", "v": "181 Gallons (ISO VG 150 Winter / ISO VG 220 Summer)" }
-          ]
+          ],
+          "note": "Schlumberger conventional unit (not Lufkin). Use the setbacks and stroke lengths below when rigging an SLS-912."
         },
         {
           "type": "table",
           "heading": "SLS-912 (Schlumberger) — Setback Reference (Inches)",
-          "columns": ["Foundation Type", "Setback Value"],
+          "columns": ["Foundation Type", "Setback (in)"],
           "rows": [
             ["Unit Base", "162.4"],
             ["Concrete Slab", "152.25"],
-            ["Limestone Pan", "120 (old 110.5) For rig"]
+            ["Limestone Pan", "120 (old 110.5 for rig)"]
           ]
         },
         {
           "type": "list",
           "heading": "SLS-912 (Schlumberger) — Stroke Lengths (S.L)",
           "items": [
-            "169.70\" (Field: 170\")",
-            "140.82\" (Field: 141\")",
-            "112.83\" (Field: 113\")"
+            "169.70\"",
+            "140.82\"",
+            "112.83\""
           ]
         }
       ]
@@ -235,29 +207,17 @@
       "label": "C-1280",
       "sections": [
         {
-          "type": "text",
-          "heading": "1. LLS-1280 (C1280D-427-192)",
-          "body": "Specifications, structural geometry, bearing designations, foundation setbacks, stroke lengths, and component lift weights for the LLS-1280 (C1280D-427-192) unit."
-        },
-        {
           "type": "kv",
-          "heading": "LLS-1280 (C1280D-427-192) — Catalog Structural, Bearing & Counterbalance Specs",
+          "heading": "1. LLS-1280 (C1280D-427-192) — Structural & Bearing Specs",
           "items": [
-            { "k": "Series / Catalog Model", "v": "LLS / C1280D-427-192" },
-            { "k": "Polished Rod Capacity", "v": "42,700 lbf" },
-            { "k": "Rated Torque / Gear Ratio", "v": "1,280,000 lbf.in / 28.67 (10 rpm)" },
             { "k": "Crank Type & Weight", "v": "GRC120D (4,699 × 2 lbm)" },
             { "k": "Crank Pin / Equalizer / Center Bearings", "v": "WAS100 / EAS100 / SAS100" },
-            { "k": "Crank Pin Bore Positions (R1–R4)", "v": "52.95\", 44.49\", 36.02\", 27.56\"" },
             { "k": "Structural Unbalance", "v": "-2,070 lbf" },
-            { "k": "Effective Counterbalance (ECB)", "v": "3,629 lbf (Cranks Only) / 29,457 lbf (Max w/ 4×WMA30 + 4×WAX05)" },
-            { "k": "Torque Factor @ 90° (S1 / S2 / S3 / S4)", "v": "90.20\" / 76.43\" / 62.27\" / 47.84\"" },
             { "k": "A (Center bearing shaft to equalizer shaft)", "v": "120.00\"" },
             { "k": "B (Center bearing shaft to wellhead)", "v": "210.04\"" },
             { "k": "C (Center bearing height)", "v": "286.02\"" },
             { "k": "L (Bottom of stroke to unit base)", "v": "55.12\"" },
             { "k": "R (Unit base front to wellhead / Setback)", "v": "139.17\"" },
-            { "k": "Wireline Hanger & Rope", "v": "1-3/8\" × 16\" centers | 34, 6×25F EIPS (512\" length)" },
             { "k": "Sheave Diameter & Groove", "v": "50\" / 10C" },
             { "k": "Reducer Oil Capacity", "v": "251 Gallons (ISO VG 150 Winter / ISO VG 220 Summer)" }
           ]
@@ -265,29 +225,29 @@
         {
           "type": "table",
           "heading": "LLS-1280 — Setback Reference (Inches)",
-          "columns": ["Model / Case", "Foundation Type", "Setback Value"],
+          "columns": ["Case / Pad Config", "Foundation Type", "Setback (in)"],
           "rows": [
-            ["LLS-1280", "Unit Base", "139.17"],
-            ["LLS-1280 (Case 1)", "Concrete Slab", "122"],
-            ["LLS-1280 (Case 1)", "Limestone Pan", "110"],
-            ["LLS-1280 (Case 2)", "Concrete Slab", "125 (check)"],
-            ["LLS-1280 (Case 2)", "Limestone Pan", "115"]
+            ["Standard", "Unit Base", "139.17"],
+            ["Case 1", "Concrete Slab", "122"],
+            ["Case 1", "Limestone Pan", "110"],
+            ["Case 2", "Concrete Slab", "125 (check)"],
+            ["Case 2", "Limestone Pan", "115"]
           ]
         },
         {
           "type": "list",
           "heading": "LLS-1280 — Stroke Lengths (S.L)",
           "items": [
-            "192.56\" (Nominal: 192\")",
-            "159.59\" (Nominal: 160\")",
-            "127.93\" (Nominal: 128\")",
-            "97.16\" (Nominal: 97\")"
+            "192.56\"",
+            "159.59\"",
+            "127.93\"",
+            "97.16\""
           ]
         },
         {
           "type": "table",
-          "heading": "LLS-1280 — Detailed Component Weights (Lbs)",
-          "columns": ["Component Description", "Weight"],
+          "heading": "LLS-1280 — Component Lift Weights (Lbs)",
+          "columns": ["Component Description", "Weight (lb)"],
           "rows": [
             ["Reducer with Cranks", "34,800"],
             ["Horsehead", "4,880"],
@@ -302,33 +262,24 @@
           ]
         },
         {
-          "type": "text",
-          "heading": "2. LC-1280 (Lufkin Standard Catalog — C-1280D-427-192)",
-          "body": "Lufkin standard catalog geometry, dimensional data, bearing designations, stroke lengths, and foundation setbacks for LC-1280 (C-1280D-427-192)."
-        },
-        {
           "type": "kv",
-          "heading": "LC-1280 (C-1280D-427-192) — Lufkin Catalog Structural & Bearing Specs",
+          "heading": "2. LC-1280 (Lufkin / C-1280D-427-192) — Structural & Bearing Specs",
           "items": [
-            { "k": "Catalog Model", "v": "C-1280D-427-192 (42,700 lbs)" },
             { "k": "Crank Type", "v": "106110CA" },
-            { "k": "Crank Pin Bearing", "v": "OS" },
-            { "k": "Equalizer Bearing", "v": "OOR" },
-            { "k": "Center Bearing", "v": "0OTG" },
-            { "k": "Walking Beam", "v": "W36 x 247" },
+            { "k": "Crank Pin / Equalizer / Center Bearings", "v": "OS / OOR / 0OTG" },
+            { "k": "Walking Beam", "v": "W36 × 247" },
+            { "k": "Structural Unbalance", "v": "-995 lbf" },
             { "k": "A (Center bearing shaft to equalizer shaft)", "v": "120.00\"" },
             { "k": "B (Center bearing shaft to wellhead)", "v": "210.00\"" },
             { "k": "C (Center bearing height)", "v": "286.50\"" },
             { "k": "L (Bottom of stroke to unit base bottom)", "v": "65.38\"" },
-            { "k": "R (Unit base front to wellhead / Setback)", "v": "143.00\"" },
-            { "k": "Structural Unbalance (S.U.)", "v": "-995 lbs" },
-            { "k": "Crank Radii (R1, R2, R3, R4)", "v": "53\", 46\", 39\", 32\"" }
+            { "k": "R (Unit base front to wellhead / Setback)", "v": "143.00\"" }
           ]
         },
         {
           "type": "table",
           "heading": "LC-1280 (Lufkin) — Setback Reference (Inches)",
-          "columns": ["Foundation Type", "Setback Value"],
+          "columns": ["Foundation Type", "Setback (in)"],
           "rows": [
             ["Unit Base", "143"],
             ["Concrete Slab", "130"],
@@ -339,10 +290,10 @@
           "type": "list",
           "heading": "LC-1280 (Lufkin) — Stroke Lengths (S.L)",
           "items": [
-            "192\" (Catalog: 192\")",
-            "168\" (Catalog: 166\")",
-            "144\" (Catalog: 139\")",
-            "126\" (Catalog: 113\")"
+            "192\"",
+            "166\"",
+            "139\"",
+            "113\""
           ]
         }
       ]

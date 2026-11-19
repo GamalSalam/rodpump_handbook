@@ -144,6 +144,13 @@
       "label": "K-Bar, PR & Guides",
       "sections": [
         {
+          "type": "image",
+          "heading": "Sinker Bar (K-Bar) Dimensions",
+          "src": "images/kbar-dimensions.png",
+          "alt": "Norris sinker bar dimensional diagram showing body diameter D, thread S_T, pin shoulder D_F, wrench flat W_S / L_WS, and length L",
+          "caption": "D (Bar Body), S_T (Thread), D_F (Pin Shoulder), W_S / L_WS (Wrench Flat), L (Length)."
+        },
+        {
           "type": "table",
           "heading": "Norris Sinker Bars (K-Bars)",
           "columns": [
